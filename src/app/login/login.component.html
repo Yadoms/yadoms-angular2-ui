@@ -1,0 +1,79 @@
+<nav>
+    <div class="toolbarIcons">
+        <a [routerLink]=" ['./'] " routerLinkActive="active"><span class="brand-logo">GSS Mobile</span></a>
+    </div>
+</nav>
+
+
+<div class="row" >
+   <form id="logForm" class="col s12" role="search">
+      <div class="row">
+         <div class="input-field col s12 m4 offset-m4">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="userLoginInput" type="text" class="validate" [disabled]="loading"  [(ngModel)]="userLogin" [ngModelOptions]="{standalone: true}" required>
+            <label for="userLoginInput">{{'login.login' | translate }}</label>
+         </div>
+      </div>
+      <div class="row">
+         <div class="input-field col s12 m4 offset-m4">
+            <i class="material-icons prefix">grain</i>
+            <input id="userPasswordInput" type="password" class="validate" [disabled]="loading"  [(ngModel)]="userPassword" [ngModelOptions]="{standalone: true}" required>
+            <label for="userPasswordInput">{{'login.password' | translate }}</label>
+         </div>
+    </div>
+
+      <div class="row">
+         <div class="input-field col s12 m4 offset-m4 center-align">
+            <button *ngIf="!loading" type="submit" class="btn waves-effect waves-light" (click)="tryToLog()" ng-disabled="loading">
+                <span>{{'login.connect' | translate }}</span>
+                <i class="material-icons right">send</i>
+            </button>
+            <div *ngIf="loading">
+                <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-blue">
+                        <div class="circle-clipper left">
+                        <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                        <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-yellow">
+                        <div class="circle-clipper left">
+                        <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                        </div>
+                    </div>
+
+                    <div class="spinner-layer spinner-green">
+                        <div class="circle-clipper left">
+                        <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>                    
+            </div>            
+         </div>
+      </div>
+   </form>
+
+
+</div>

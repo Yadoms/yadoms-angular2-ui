@@ -1,0 +1,115 @@
+{
+    "sidenav" : {
+        "dashboard" : "Tableau de bord",
+        "fleet" : "Flotte",
+        "usage" : "Usage",
+        "import": "Importer",
+        "reports" : "Statistiques",
+        "parameters": "Paramètres",
+        "logout" : "Déconnecter"
+    },
+    "login" : {
+        "welcome" : "Bienvenue {{name}}",
+        "login": "Identifiant",
+        "password": "Mot de passe",
+        "connect": "Connecter"
+    },
+    "sdbs2" : {
+        "browsecomponent" : {
+            "title" : "Double cliquez sur le fichier à importer",
+            "loading" : "Chargement..."
+        }
+    },
+    "import" : {
+        "connectionInProgress" : "Connexion en cours...",
+        "runTool" : "Veuillez lancer l'outil",
+        "tool" : "Gestionnaire de cartes SD BS2",
+        "installit" : "ou bien installez-le !",
+        "windows-installer" : "Installation Windows",
+        "windows-portable" : "Version portable",
+        "linux-targz" : "Linux (binaires)",
+        "linux-deb" : "Linux (Installeur debian)",
+        "linux-rpm" : "Linux (Installeur RPM)",
+        "macos-targz" : "MacOS (binaires)",
+        "download" : "Télécharger"
+    },
+    "upload" : {
+        "title" : "Déchargement des données pour {{immat}}",
+        "size" : "Taille à envoyer : {{value}} {{units}}",
+        "details" : "Détails",
+        "sendfile" : "Envoyer le fichier",
+        "started" : "Envoi démarré",
+        "done" : "Envoi terminé",
+        "notneeded" : "Aucune donnée à importer",
+        "finalize" : "Finalisation",
+        "fail" : {
+            "starterror" : "Impossible de démarrer un envoi : {{error}}",
+            "parterror" : "Impossible d'envoyer intégralement le fichier : {{error}}",
+            "servererror" : "Impossible d'envoyer le fichier : {{error}}",
+            "updateSdcard" : "Impossible de mettre à jour le fichier : {{error}}",
+            "finalize" : "Impossible de finaliser l'importation des données : {{error}}"
+        },
+        "result" : {
+            "success" : "Transfert terminé. Le seveur traitera les données dès que possible",
+            "error" : "Le transfert a echoué. <br/><i>{{reason}}</i>"
+        }
+    },
+    "whatsnew" : {
+        "title" : "Quoi de neuf ?",
+        "flightcount" : "{{flightCount}} vols",
+        "exceedanceCount" : "{{exceedanceCount}} dépassements",
+        "warningPanelCount" : "{{warningPanelCount}} warning panel",
+        "hazardousFlyingCount" : "{{hazardousFlyingCount}} vols hazardeux"
+    },
+    "dashboardmap" : {
+        "title" : "Temps réel"
+    },
+    "summary" : {
+        "title" : "Synthèse"
+    },
+    "configuration" : {
+        "title" : "Configuration du BS2 pour {{immat}}",
+        "apply" : "Appliquer la configuration",
+        "clearExcLight" : "Eteindre le voyant EXC",
+        "adjustBackLight" : "Ajuster le rétro-éclairage",
+        "adjustFrontLight" : "Ajuster la luminosité des leds",
+        "result" : {
+            "success" : "Configuration réalisée. Vous pouvez désormais insérer la carte dans le BriteSaver2",
+            "error" : "La configuration a echoué !<br/><i>{{reason}}</i>"
+        }
+    },
+    "bs2" : {
+        "title" : "BS2",
+        "pn" : "P/N: {{recpn}}",
+        "sn" : "S/N: {{recsn}}",
+        "confil" : "{{confil}}",
+        "modules" : {
+            "active" : "Modules actifs",
+            "dts" : "Module DTS",
+            "acq" : "Module ACQ",
+            "acqAngles" : "avec calcul des angles",
+            "com" : "Module BS2E",
+            "harden" : "avec mémoire durcie"
+        },
+        "invalid" : "Le fichier est corrompu, ou bien l'hélicoptère n'est pas enregistré dans le système"
+    },    
+    "units" : {
+        "b" : "o",
+        "kb" : "Ko",
+        "mb" : "Mo",
+        "tb" : "To",
+        "pb" : "Po",
+        "eb" : "Eo",
+        "zb" : "Zo",
+        "yb" : "Yo",
+        "ib" : "io",
+        "kib" : "Kio",
+        "mib" : "Mio",
+        "tib" : "Tio",
+        "pib" : "Pio",
+        "eib" : "Eio",
+        "zib" : "Zio",
+        "yib" : "Yio",
+        "percent":  "%"
+    }
+}

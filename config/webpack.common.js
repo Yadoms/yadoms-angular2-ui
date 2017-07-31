@@ -30,7 +30,7 @@ const AOT = helpers.hasNpmFlag('aot');
 const VERSION = require("../package.json").version || '0.0.0';
 
 const METADATA = {
-  title: 'GSS Mobile +@' + VERSION,
+  title: 'Yadoms +@' + VERSION,
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   version:VERSION,
@@ -267,7 +267,7 @@ module.exports = function (options) {
       new CopyWebpackPlugin([
         { from: 'src/assets', to: 'assets' },
         { from: 'src/meta'},
-        { from: 'src/gssconfig.json'}
+        { from: 'src/yadomsconfig.json'}
       ]),
 
 

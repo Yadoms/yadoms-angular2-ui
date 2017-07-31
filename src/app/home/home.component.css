@@ -1,0 +1,29 @@
+header, main, footer {
+  padding-left: 240px;
+}
+
+.toolbarIcons {
+  padding-left: 250px;
+}
+
+
+/* Reduce space between icon and text inside sidenav*/
+.side-nav .material-icons {
+  margin-right:15px !important;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer, .toolbarIcons {
+    padding-left: 0;
+  }
+}
+
+.card {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+/* Sidenav : use to disable current active link */
+a.activeRouterLink {
+  /* pointer-events: none;
+   cursor: default;*/
+}

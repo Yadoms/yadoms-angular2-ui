@@ -1,0 +1,8 @@
+
+//override primary colors
+$primary-color: color("blue", "darken-2") !default;
+//$secondary-color: color("green", "base") !default;
+
+//Define here GSS colors
+$gss-valid-color: color("green", "base") !default;
+$gss-notvalid-color: color("amber", "base") !default;
