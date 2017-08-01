@@ -300,6 +300,6 @@ export class RestServerService {
      * @private Should not be called outside server-rest.js
      */
     private getServerAbsolutePath_(): string {
-        return this.runtimeConfiguration.get().gssServer.restUrl;
+        return this.runtimeConfiguration.get().yadomsServer.restUrl;
     }
 }

@@ -2,7 +2,7 @@
      <nav>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <div class="toolbarIcons">
-        <a [routerLink]=" ['/'] "><span class="brand-logo">GSS Mobile</span></a>
+        <a [routerLink]=" ['/'] "><span class="brand-logo">Yadoms</span></a>
     </div>
     <ul id="slide-out" class="side-nav fixed">
         <div class="center-align">
@@ -28,12 +28,3 @@
     <router-outlet></router-outlet>
 </main>
 
-  <div class="fixed-action-btn" *ngIf="sdcards?.length >0">
-    <a class="btn-floating btn-large red" [class.pulse]="pulseSdCardbutton">
-      <i class="large material-icons">sim_card_alert</i>
-    </a>
-    <ul>
-      <li *ngFor="let sd of sdcards"><a class="btn-floating green"  [routerLink]="['importfile', { file: sd.fullPath}]"><i class="material-icons">sd_card</i></a> </li>
-      <li *ngFor="let sd of sdcards"><a class="btn-floating blue"  [routerLink]="['configurefile', { file: sd.fullPath}]"><i class="material-icons">settings</i></a> </li>
-    </ul>
-  </div>
