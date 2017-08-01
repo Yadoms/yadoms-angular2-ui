@@ -22,7 +22,7 @@
     "blockly",
     "python"
   ],
-  "author": "Jean-Michel DECORET <decoretjm@gmail.com>",
+  "author": "jano42 <decoretjm@gmail.com>",
   "homepage": "https://github.com/Yadoms/yadoms-angular2-ui",
   "license": "LGPL",
   "scripts": {
