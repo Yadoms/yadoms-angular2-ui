@@ -6,11 +6,13 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { TranslateModule } from 'ng2-translate';
 import { CoreModule } from '../core';
 import { SharedModule } from '../shared';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageComponent } from './dashboard/page.component';
 
 @NgModule({
     imports: [CommonModule, routing, TranslateModule, SharedModule, Ng2PageScrollModule.forRoot()],
     exports: [],
-    declarations: [ HomeComponent, ],
+    declarations: [ HomeComponent, DashboardComponent, PageComponent],
     providers: []
 })
 export class HomeModule {

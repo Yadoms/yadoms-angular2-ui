@@ -22,42 +22,8 @@ export class CheckServerComponent implements OnInit {
 
     public checkServerIsAlive(): void {
         console.log('Check for server is alive');
-        this.loading = true;
-        try {
-            this.restserverService.isAlive()
-            .then( (result: boolean) => {
-                console.log('Check for server is alive : result : ' + result);
-                if (result === true) {
-                    this.router.navigate(['home']);
-                } else {
-                    this.hasFailed = true;
-                }
-                this.loading = false;
-            })
-            .catch( (e1) => {
-                // allow one retry (after server reboot, always pass here)
-                this.restserverService.isAlive()
-                .then( (result: boolean) => {
-                    console.log('Check for server is alive : result : ' + result);
-                    if (result === true) {
-                        this.router.navigate(['home']);
-                    } else {
-                        this.hasFailed = true;
-                    }
-                    this.loading = false;
-                })
-                .catch( (e2) => {
-                    console.warn(e1);
-                    console.warn(e2);
-                    console.warn('Fail to check for server is alive : ' + e2);
-                    this.hasFailed = true;
-                    this.loading = false;
-                });
-            });
-        } catch (error) {
-            console.error('checkServerIsAlive : error : ' + error);
-            this.hasFailed = true;
-            this.loading = false;
-        }
+        this.loading = false;
+        this.hasFailed = false;
+        this.router.navigate(['home']);
     }
 }

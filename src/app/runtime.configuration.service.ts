@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptionsArgs, RequestOptions } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 export interface RuntimeConfiguration {
     yadomsServer: {
@@ -9,7 +9,7 @@ export interface RuntimeConfiguration {
 
 @Injectable()
 export class RuntimeConfigurationService {
-    private configFileName: string = 'gssconfig.json';
+    private configFileName: string = 'yadomsconfig.json';
 
     /**
      * The default configuration schema
@@ -22,7 +22,7 @@ export class RuntimeConfigurationService {
 
     private currentConfiguration: RuntimeConfiguration = null;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     public load(): Promise<RuntimeConfiguration> {
@@ -30,13 +30,10 @@ export class RuntimeConfigurationService {
             if (this.currentConfiguration === null) {
                 console.log('Loading configuration from : ' + this.configFileName);
                 this .http
-                    .request(this.configFileName)
-                    .share()
-                    .retry(0)
-                    .timeout(90000)
-                    .subscribe( (res: Response) => {
+                    .get(this.configFileName, { responseType: 'text' })
+                    .subscribe( (res: string) => {
                         try {
-                            const readCfg = res.json();
+                            const readCfg = JSON.parse(res);
                             this.currentConfiguration = readCfg;
                             console.log(readCfg);
                             resolve(this.currentConfiguration);

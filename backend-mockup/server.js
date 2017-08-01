@@ -1,4 +1,6 @@
 var express = require('express');
+var session = require('express-session');
+var csrf = require('csurf');
 var app = express();
 var fs = require('fs');
 var crypto = require('crypto');
@@ -10,15 +12,44 @@ function randomStringAsBase64Url(size) {
   return base64url(crypto.randomBytes(size));
 }
 
+
 var router = express.Router();
+
+router.use(session({
+  secret: 'My super session secret',
+  cookie: {
+    httpOnly: true,
+    secure: false
+  }
+}));
+
+router.use(csrf());
+
+router.use(function(req, res, next) {
+  res.locals._csrf = req.csrfToken();
+  next();
+});
+
 
 //add CORS
 router.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
+
+
 
 function generateSuccess(data) {
     return  {
@@ -36,6 +67,14 @@ function generateError(message, data)  {
         message : message
     };
 }
+
+router.get('/page', function(req, res) {
+    fs.readFile(__dirname + '/data/pages.json', 'utf-8', function(err,data) {
+        res.json(generateSuccess(JSON.parse(data)));
+    });
+});
+
+
 /*
 connectedUsers = [];
 

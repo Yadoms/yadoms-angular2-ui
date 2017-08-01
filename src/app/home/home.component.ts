@@ -4,6 +4,8 @@ import { AppState } from '../app.service';
 import { AuthenticationService } from '../core/authentication/authentication.service';
 import { RestServerService } from '../core/restserver.service';
 import { NavigatorService } from '../core/navigator.service';
+import { PageService } from '../core/pages.service';
+import { Pages } from '../core/models/pages';
 import { Observable } from 'rxjs/Rx';
 import * as $ from 'jquery';
 import { TranslatePipe } from 'ng2-translate';
@@ -15,25 +17,20 @@ import { TranslatePipe } from 'ng2-translate';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-  public nseLogo: string = 'assets/img/nse.png';
+  public logo: string = 'assets/img/logo.png';
+  public pages: Pages = null;
 
-  constructor(public appState: AppState, public _authenticationService: AuthenticationService, private router: Router,
-              private restServerService: RestServerService, public navigatorService: NavigatorService) {
+  constructor(public appState: AppState, private router: Router, private restServerService: RestServerService, public navigatorService: NavigatorService, private pageService: PageService) {
   }
 
   public ngOnInit() {
     console.log('home component loaded');
-
     this.initializeSidenav();
-  }
 
-  public get loggedUserName(): string {
-    return this._authenticationService.getLogin();
-  }
-
-  public onLogout() {
-      this._authenticationService.signout();
-      this.router.navigate(['/']);
+    this.pageService.getAll()
+    .then( (pages: Pages) => {
+      this.pages = pages;
+    });
   }
 
   /**

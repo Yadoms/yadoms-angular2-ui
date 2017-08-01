@@ -6,20 +6,17 @@
     </div>
     <ul id="slide-out" class="side-nav fixed">
         <div class="center-align">
-            <img [src]="nseLogo"/>
+            <img [src]="logo"/>
         </div>
-        <li><a class="subheader"><i class="material-icons">account_circle</i>{{ _authenticationService.getLogin() }}</a></li>
         <div class="divider"></div>
         <li><a [routerLink]=" ['/home'] " routerLinkActive="activeRouterLink"><i class="material-icons">dashboard</i>{{'sidenav.dashboard' | translate }}</a></li>
+
+        <li *ngFor="let p of pages?.page"><a [routerLink]="[p.id]" routerLinkActive="activeRouterLink"><i class="material-icons">{{p.icon}}</i>{{p.name}}</a></li>
         <!-- 
           <li><a [routerLink]=" ['detail'] " routerLinkActive="activeRouterLink"><i class="material-icons">cloud_queue</i>{{'sidenav.fleet' | translate }}</a></li>
         -->
         <li><a [routerLink]=" ['usage'] " routerLinkActive="activeRouterLink"><i class="material-icons">query_builder</i>{{'sidenav.usage' | translate }}</a></li>
         <li *ngIf="!navigatorService.isMobileNavigator()"><a [routerLink]=" ['import'] " routerLinkActive="activeRouterLink"><i class="material-icons">present_to_all</i>{{'sidenav.import' | translate }}</a></li>
-      <!--  <li><a [routerLink]=" ['about'] " routerLinkActive="activeRouterLink"><i class="material-icons">receipt</i>{{'sidenav.reports' | translate }}</a></li>
-        <li><a [routerLink]=" ['about'] " routerLinkActive="activeRouterLink"><i class="material-icons">settings</i>{{'sidenav.parameters' | translate }}</a></li>
-        -->
-        <li><a (click)="onLogout()"><i class="material-icons">power_settings_new</i>{{'sidenav.logout' | translate }}</a></li>
     </ul>
  </nav>
 </div>

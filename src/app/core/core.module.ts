@@ -2,15 +2,13 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { WebSocketService } from './websocket.service';
 import { RestServerService } from './restserver.service';
-import { AuthenticationService } from './authentication/authentication.service';
-import { AuthGuardService } from './authentication/auth-guard.service';
 import { ErrorService } from './error.service';
 import { NavigatorService } from './navigator.service';
+import { PageService } from './pages.service';
 
 @NgModule({
   imports:      [ CommonModule ],
-  providers: [  WebSocketService, RestServerService, AuthenticationService,
-                ErrorService, AuthGuardService, NavigatorService ]
+  providers: [  WebSocketService, RestServerService, ErrorService, NavigatorService, PageService ]
 })
 export class CoreModule {
     public static forRoot(providedLoader?: any): ModuleWithProviders {

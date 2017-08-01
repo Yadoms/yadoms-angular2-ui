@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AppState } from '../../app.service';
 import { OpacifyDirective } from '../../shared/opacify.directive';
+import { PageService } from '../../core/pages.service';
+import { Pages } from '../../core/models/pages';
 
 @Component({
   selector: 'dashboard',
@@ -9,11 +11,18 @@ import { OpacifyDirective } from '../../shared/opacify.directive';
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  constructor(public appState: AppState) {
+
+  public pages: Pages = null;
+
+  constructor(public appState: AppState, private pageService: PageService) {
   }
 
   public ngOnInit() {
     console.log('DashboardComponent loaded');
 
+    this.pageService.getAll()
+    .then( (pages: Pages) => {
+      this.pages = pages;
+    });
   }
 }

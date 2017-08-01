@@ -1,12 +1,12 @@
 <nav>
     <div class="toolbarIcons">
-        <a [routerLink]=" ['./'] " routerLinkActive="active"><span class="brand-logo">GSS Mobile</span></a>
+        <a [routerLink]=" ['./'] " routerLinkActive="active"><span class="brand-logo">Yadoms</span></a>
     </div>
 </nav>
 <div class="center-align">
-    <img src="/assets/img/nse.png" class="logo"/>
+    <img src="/assets/img/logo.png" class="logo"/>
     <div *ngIf="loading" class="content">
-        <p >Connexion avec le serveur GSS...</p>
+        <p >Connexion avec Yadoms...</p>
         <div class="preloader-wrapper active">
             <div class="spinner-layer spinner-blue">
                 <div class="circle-clipper left">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div *ngIf="hasFailed && !loading" class="content">
-        <p>Impossible de contacter le serveur GSS...</p>
+        <p>Impossible de contacter le serveur...</p>
         <div class="btn btn-default" (click)="checkServerIsAlive()">Retenter...</div>
     </div>
 <div>

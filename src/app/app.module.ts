@@ -6,6 +6,7 @@ import { NgModule, ApplicationRef, APP_INITIALIZER } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
+import { HttpClientModule } from '@angular/common/http';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -19,7 +20,6 @@ import { AppState, InternalStateType } from './app.service';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { CheckServerComponent } from './check/check-server.component';
-import { LoginComponent } from './login/login.component';
 import { CoreModule } from './core';
 import { BrowserXhr } from '@angular/http';
 import { CustomBrowserXhr } from './http/custom.browser.xhr.service';
@@ -69,14 +69,14 @@ export function createTranslateLoader(http: Http) {
     AppComponent,
     AboutComponent,
     NoContentComponent,
-    CheckServerComponent,
-    LoginComponent
+    CheckServerComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules, enableTracing: false }),
     TranslateModule.forRoot({ provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [Http] }),
     CoreModule.forRoot(),
