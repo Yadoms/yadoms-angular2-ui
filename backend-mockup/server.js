@@ -74,6 +74,20 @@ router.get('/page', function(req, res) {
     });
 });
 
+router.get('/page/:pageid', function(req, res) {
+    fs.readFile(__dirname + '/data/pages.json', 'utf-8', function(err,data) {
+        var d = JSON.parse(data);
+        var result = _.find(d.page, ['id', req.params.pageid]);
+        if(result) {
+            res.json(generateSuccess(result));
+        } else {
+            res.json(generateError('Unknown page id=' + req.params.pageid))
+        }
+    });
+});
+
+
+
 router.get('/page/:pageid/widget', function(req, res) {
     fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function(err,data) {
         var d = JSON.parse(data);

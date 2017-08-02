@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { RestResult } from './rest-result';
 import { RestServerService } from './restserver.service';
 import { Pages } from './models/pages';
+import { Page } from './models/page';
+import * as _ from 'lodash';
 
 @Injectable()
 export class PageService {
@@ -15,5 +17,24 @@ export class PageService {
      */
     public getAll(): Promise<Pages> {
         return this.restServerService.get<Pages>('page');
+    }
+
+    /**
+     * Get the first page, ordered by pageOrder, then id and finally by name
+     */
+    public getFirst(): Promise<Page> {
+        return new Promise<Page>( (resolve, reject) => {
+            this.getAll().then( (pages: Pages) => {
+                resolve(_.head(_.orderBy(pages.page, ['pageOrder', 'id', 'name'])));
+            }).catch(reject);
+        });
+    }
+
+    /**
+     * Get all declared pages
+     * @returns The page list, through Promise
+     */
+    public get(id: number): Promise<Page> {
+        return this.restServerService.get<Page>('page/' + id);
     }
 }
