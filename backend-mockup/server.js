@@ -74,6 +74,22 @@ router.get('/page', function(req, res) {
     });
 });
 
+router.get('/page/:pageid/widget', function(req, res) {
+    fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function(err,data) {
+        var d = JSON.parse(data);
+        d.widget = _.filter(d.widget, ['idPage', req.params.pageid]);
+        res.json(generateSuccess(d));
+    });
+});
+
+
+router.get('/widget', function(req, res) {
+    fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function(err,data) {
+        res.json(generateSuccess(JSON.parse(data)));
+    });
+});
+
+
 
 /*
 connectedUsers = [];
