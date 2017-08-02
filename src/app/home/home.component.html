@@ -11,7 +11,7 @@
         <div class="divider"></div>
         <li><a [routerLink]=" ['/home'] " routerLinkActive="activeRouterLink"><i class="material-icons">dashboard</i>{{'sidenav.dashboard' | translate }}</a></li>
 
-        <li *ngFor="let p of pages?.page"><a [routerLink]="[p.id]" routerLinkActive="activeRouterLink"><i class="material-icons">{{p.icon}}</i>{{p.name}}</a></li>
+        <li *ngFor="let p of pages?.page"><a [routerLink]="['/home/page/' + p.id]" routerLinkActive="activeRouterLink"><i class="material-icons">{{p.icon}}</i>{{p.name}}</a></li>
         <!-- 
           <li><a [routerLink]=" ['detail'] " routerLinkActive="activeRouterLink"><i class="material-icons">cloud_queue</i>{{'sidenav.fleet' | translate }}</a></li>
         -->
