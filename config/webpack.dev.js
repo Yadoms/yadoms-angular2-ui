@@ -199,7 +199,8 @@ module.exports = function (options) {
             'less',
             'material-design-icons-iconfont',
             'reflect-metadata',
-            'zone.js'
+            'zone.js',
+            'packery-rows'
           ]
         },
         dllDir: helpers.root('dll'),
