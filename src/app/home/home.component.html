@@ -15,8 +15,28 @@
         <!-- 
           <li><a [routerLink]=" ['detail'] " routerLinkActive="activeRouterLink"><i class="material-icons">cloud_queue</i>{{'sidenav.fleet' | translate }}</a></li>
         -->
-        <li><a [routerLink]=" ['usage'] " routerLinkActive="activeRouterLink"><i class="material-icons">query_builder</i>{{'sidenav.usage' | translate }}</a></li>
-        <li *ngIf="!navigatorService.isMobileNavigator()"><a [routerLink]=" ['import'] " routerLinkActive="activeRouterLink"><i class="material-icons">present_to_all</i>{{'sidenav.import' | translate }}</a></li>
+        <li><div class="divider"></div></li>
+        <li><a [routerLink]=" ['configuration'] " routerLinkActive="activeRouterLink"><i class="material-icons">widgets</i>{{'sidenav.customize' | translate }}</a></li>
+        <li><div class="divider"></div></li>
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">{{'sidenav.administration' | translate }}<i class="material-icons">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li><a [routerLink]=" ['configuration'] " routerLinkActive="activeRouterLink"><i class="material-icons">settings_applications</i>{{'sidenav.configuration' | translate }}</a></li>
+                  <li><a [routerLink]=" ['plugins'] " routerLinkActive="activeRouterLink"><i class="material-icons">extension</i>{{'sidenav.plugins' | translate }}</a></li>
+                  <li><a [routerLink]=" ['devices'] " routerLinkActive="activeRouterLink"><i class="material-icons">devices_other</i>{{'sidenav.devices' | translate }}</a></li>
+                  <li><a [routerLink]=" ['automation'] " routerLinkActive="activeRouterLink"><i class="material-icons">play_circle_outline</i>{{'sidenav.automation' | translate }}</a></li>
+                  <li><a [routerLink]=" ['recipients'] " routerLinkActive="activeRouterLink"><i class="material-icons">mail</i>{{'sidenav.recipients' | translate }}</a></li>
+                  <li><a [routerLink]=" ['update'] " routerLinkActive="activeRouterLink"><i class="material-icons">update</i>{{'sidenav.update' | translate }}</a></li>
+                  <li><a [routerLink]=" ['maintenance'] " routerLinkActive="activeRouterLink"><i class="material-icons">healing</i>{{'sidenav.maintenance' | translate }}</a></li>
+                  <li><a [routerLink]=" ['about'] " routerLinkActive="activeRouterLink"><i class="material-icons">info</i>{{'sidenav.about' | translate }}</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
     </ul>
  </nav>
 </div>

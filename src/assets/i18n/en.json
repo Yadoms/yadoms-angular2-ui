@@ -1,115 +1,15 @@
 {
     "sidenav" : {
         "dashboard" : "Dashboard",
-        "fleet" : "Fleet",
-        "usage" : "Usage",
-        "import": "Import",
-        "reports" : "Statistics",
-        "parameters": "Parameters",
-        "logout" : "Logout"
-    },
-    "login" : {
-        "welcome" : "Welcome {{name}}",
-        "login": "Login",
-        "password": "Password",
-        "connect": "Connect"    
-    },
-    "sdbs2" : {
-        "browsecomponent" : {
-            "title" : "Double clic on the file to import",
-            "loading" : "loading..."
-        }
-    },
-    "import" : {
-        "connectionInProgress" : "Connecting...",
-        "runTool" : "Please start tool",
-        "tool" : "BS2 SDCard manager",
-        "installit" : "else install it !",
-        "windows-installer" : "Wndows installer",
-        "windows-portable" : "Portable version",
-        "linux-targz" : "Linux (binaries)",
-        "linux-deb" : "Linux (Debian installer)",
-        "linux-rpm" : "Linux (RPM installer)",
-        "macos-targz" : "MacOS (binaries)",
-        "download" : "Download"
-    },
-    "upload" : {
-        "data.upload" : "SdCard file upload for {{immat}}",
-        "size" : "Size to upload : {{value}}",
-        "details" : "Details",
-        "sendfile" : "Send file",
-        "started" : "Upload started",
-        "done" : "Upload done",
-        "notneeded" : "No data to send",
-        "finalize" : "Finalizing",
-        "fail" : {
-            "starterror" : "Cannot start upload : {{error}}",
-            "parterror" : "Cannot sned all the file content : {{error}}",
-            "servererror" : "Cannot upload file : {{error}}",
-            "updateSdcard" : "Cannot update SDCards file : {{error}}",
-            "finalize" : "Cannot finalize data import : {{error}}"            
-        },
-        "result" : {
-            "success" : "Upload success. The server will process data as soon as possible",
-            "error" : "Upload fail !<br/><i>{{reason}}</i>"
-        }
-    },
-    "whatsnew" : {
-        "title" : "What's new",
-        "flightcount" : "{{flightCount}} flights",
-        "exceedanceCount" : "{{exceedanceCount}} exceedances",
-        "warningPanelCount" : "{{warningPanelCount}} warning panel",
-        "hazardousFlyingCount" : "{{hazardousFlyingCount}} hazardous flying"
-    },    
-    "dashboardmap" : {
-        "title" : "Realtime"
-    },
-    "summary" : {
-        "title" : "Summary"
-    },
-    "configuration" : {
-        "title" : "BS2 Configuration for {{immat}}",
-        "apply" : "Apply configuration",
-        "clearExcLight" : "Switch off EXC light",
-        "adjustFrontLight" : "Adjust front light",
-        "adjustBackLight" : "Adjust the brightness of the leds",
-        "result" : {
-            "success" : "SDCard configured with success. You can insert it into BriteSaver2",
-            "error" : "Configuration fail !<br/><i>{{reason}}</i>"
-        }
-    },
-    "bs2" : {
-        "title" : "BS2",
-        "pn" : "P/N: {{recpn}}",
-        "sn" : "S/N: {{recsn}}",
-        "confil" : "{{confil}}",
-        "modules" : {
-            "active" : "Connected modules",
-            "dts" : "DTS module",
-            "acq" : "ACQ module",
-            "acqAngles" : "with angles computation",
-            "com" : "BS2E module",
-            "harden" : "with harden memory unit"
-        },
-        "invalid" : "The file is corrupt or helicopter is not registered in the system"
-    },    
-    "units" : {
-        "b" : "bytes",
-        "kb" : "Kb",
-        "mb" : "Mb",
-        "tb" : "Tb",
-        "pb" : "Pb",
-        "eb" : "Eb",
-        "zb" : "Zb",
-        "yb" : "Yb",
-        "ib" : "ib",
-        "kib" : "Kib",
-        "mib" : "Mib",
-        "tib" : "Tib",
-        "pib" : "Pib",
-        "eib" : "Eib",
-        "zib" : "Zib",
-        "yib" : "Yib",
-        "percent":  "%"
+        "customize" : "Customize",
+        "administration" : "Administration",
+        "configuration": "System configuration",
+        "plugins" : "Plugins",
+        "devices": "Devices",
+        "automation" : "Automation centre",
+        "recipients" : "Recipients",
+        "update" : "Install & Updates",
+        "maintenance" : "Maintenance",
+        "about" : "About"
     }
 }

@@ -39,14 +39,10 @@ export class HomeComponent implements OnInit {
   private initializeSidenav() {
     $('.button-collapse').sideNav({
       menuWidth: 240, // Default is 240
-      closeOnClick: false // force to false (if true => issue on large screen, the sidenav disappear and should not)
+      closeOnClick: true
     });
 
-    // fix hiding the sidenav on click (only on small devices = only if sidenav-overlay is shown)
-    $('.side-nav').on('click', () => {
-      if ($('sidenav-overlay' ) !== null) {
-        $('.button-collapse').sideNav('hide');
-      }
-    });
+    // make all collapsible items behaviors
+    $('.collapsible').collapsible();
   }
 }
