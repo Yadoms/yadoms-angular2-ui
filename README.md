@@ -1,3 +1,10 @@
+# Work status
+
+ * base : angular4 + webpack3 + aot
+ * SideNav : done, working
+ * Backend : add a backend server which allow to develop/run it without Yadoms server and equipments
+
+
 # Considerations
 
 Developping angular website need a fake backend. 
