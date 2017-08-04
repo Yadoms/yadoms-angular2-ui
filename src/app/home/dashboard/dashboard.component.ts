@@ -24,5 +24,7 @@ export class DashboardComponent implements OnInit {
     .then( (pages: Pages) => {
       this.pages = pages;
     });
+
+    // this.componentFactoryResolver.resolveComponentFactory()
   }
 }

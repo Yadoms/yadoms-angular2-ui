@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
@@ -6,18 +6,20 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'page',
-    templateUrl: 'page.component.html'
+    templateUrl: 'page.component.html',
+    styleUrls: ['./page.component.scss']
 })
 
 export class PageComponent implements OnInit {
     @Input() public data: Page;
 
-    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService) {
+    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService, private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
     public ngOnInit() {
         this.initializeComponentFromRoute();
 
+        // this.componentFactoryResolver.resolveComponentFactory('DevFakeWidgetComponent');
         // main.js
         const packery = require('packery');
 

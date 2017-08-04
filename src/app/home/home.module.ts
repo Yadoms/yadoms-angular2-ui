@@ -8,11 +8,12 @@ import { CoreModule } from '../core';
 import { SharedModule } from '../shared';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageComponent } from './dashboard/page.component';
+import { DclWrapperComponent } from './widget-wrapper.component';
 
 @NgModule({
     imports: [CommonModule, routing, TranslateModule, SharedModule, Ng2PageScrollModule.forRoot()],
     exports: [],
-    declarations: [ HomeComponent, DashboardComponent, PageComponent],
+    declarations: [ HomeComponent, DashboardComponent, PageComponent, DclWrapperComponent ],
     providers: []
 })
 export class HomeModule {
