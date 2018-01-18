@@ -5,7 +5,7 @@ import { PageService } from '../../core/pages.service';
 import { Pages } from '../../core/models/pages';
 
 @Component({
-  selector: 'dashboard',
+  selector: 'app-dashboard',
   providers: [],
   styleUrls: [ './dashboard.component.css' ],
   templateUrl: './dashboard.component.html'

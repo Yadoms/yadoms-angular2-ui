@@ -1,4 +1,3 @@
-import Rx from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 
@@ -29,7 +28,7 @@ export class WebSocketService {
     /**
      * The current port
      */
-    private connectedToPort: number = 0;
+    private connectedToPort = 0;
 
     /**
      * Function used to generate a port number
@@ -43,7 +42,7 @@ export class WebSocketService {
      * @type {number}
      * @private
      */
-    private maxPorts: number = 0;
+    private maxPorts = 0;
 
     /**
      * Keep the command callbacks
@@ -57,7 +56,7 @@ export class WebSocketService {
      * @type {boolean}
      * @private
      */
-    private isStopRequested: boolean = false;
+    private isStopRequested = false;
 
     /**
      * Function used for disabling infinitely attempts
@@ -371,7 +370,7 @@ export class WebSocketService {
                     const contents: any = ev.target;
                     const content: Uint8Array = new Uint8Array(contents.result);
                     // content[0] = type of frame
-                    let commandUuid: string = '';
+                    let commandUuid = '';
                     if (content[1] !== 0) {
                         // parse UUID from data
                         const uuidArray = content.subarray(2, 2 + content[1]);

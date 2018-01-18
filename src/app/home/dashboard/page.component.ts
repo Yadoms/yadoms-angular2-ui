@@ -5,7 +5,7 @@ import { PageService } from '../../core/pages.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    selector: 'page',
+    selector: 'app-page',
     templateUrl: 'page.component.html',
     styleUrls: ['./page.component.scss']
 })
@@ -18,16 +18,6 @@ export class PageComponent implements OnInit {
 
     public ngOnInit() {
         this.initializeComponentFromRoute();
-
-        // this.componentFactoryResolver.resolveComponentFactory('DevFakeWidgetComponent');
-        // main.js
-        const packery = require('packery');
-
-        const pckry = new packery( '.grid', {
-            // options
-            itemSelector: '.grid-item',
-            gutter: 10
-        });
     }
 
     /**

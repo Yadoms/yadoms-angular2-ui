@@ -12,6 +12,11 @@ import { RuntimeConfigurationService, RuntimeConfiguration } from '../runtime.co
 @Injectable()
 export class RestServerService {
     /**
+     * Le chemin de server
+     */
+    private _absoluteServerPath: string;
+
+    /**
      * Concatenate to url parts
      * @param {string} url1 The first part
      * @param {string} url2 The second part
@@ -39,10 +44,6 @@ export class RestServerService {
         return url1 + url2;
     }
 
-    /**
-     * Le chemin de server
-     */
-    private _absoluteServerPath: string;
 
     constructor(private http: HttpClient, private router: Router, private location: Location, private errorService: ErrorService, private runtimeConfiguration: RuntimeConfigurationService) {
         console.log('Yadoms Rest server location : ' + this.getServerAbsolutePath_());

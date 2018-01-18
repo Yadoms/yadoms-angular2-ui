@@ -11,7 +11,7 @@ export class DurationPipe  implements PipeTransform {
       const hours = duration.hours();
       const minutes = duration.minutes();
 
-      let result: string = '';
+      let result = '';
 
       if (fullDate === 'full') {
         if (hours > 0) {

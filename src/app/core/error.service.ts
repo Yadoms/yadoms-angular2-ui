@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Utilities } from '../shared/utilities';
-import { TranslateService } from 'ng2-translate';
 import { RestResult } from './rest-result';
+import { TranslateService } from '@ngx-translate/core';
 
 export enum ErrorCodes {
       CONNECTION_UNAVAILABLE = -1,

@@ -1,3 +1,29 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Yadoms</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <h3 mat-subheader><img [src]="nseLogo" /></h3>
+        <a mat-list-item [routerLink]=" ['dashboard'] " routerLinkActive="active"><mat-icon>dashboard</mat-icon>{{'sidenav.dashboard' | translate }}</a>
+        
+        <a *ngFor="let p of pages?.page" mat-list-item [routerLink]="['/home/page/' + p.id]" routerLinkActive="active"><mat-icon>{{p.icon}}</mat-icon>{{p.name}}</a>        
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>
+<!--
 <div class="navbar-fixed">
      <nav>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -12,9 +38,6 @@
         <li><a [routerLink]=" ['/home'] " routerLinkActive="activeRouterLink"><i class="material-icons">dashboard</i>{{'sidenav.dashboard' | translate }}</a></li>
 
         <li *ngFor="let p of pages?.page"><a [routerLink]="['/home/page/' + p.id]" routerLinkActive="activeRouterLink"><i class="material-icons">{{p.icon}}</i>{{p.name}}</a></li>
-        <!-- 
-          <li><a [routerLink]=" ['detail'] " routerLinkActive="activeRouterLink"><i class="material-icons">cloud_queue</i>{{'sidenav.fleet' | translate }}</a></li>
-        -->
         <li><div class="divider"></div></li>
         <li><a [routerLink]=" ['configuration'] " routerLinkActive="activeRouterLink"><i class="material-icons">widgets</i>{{'sidenav.customize' | translate }}</a></li>
         <li><div class="divider"></div></li>
@@ -44,4 +67,4 @@
 <main>
     <router-outlet></router-outlet>
 </main>
-
+-->

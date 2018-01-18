@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../app.service';
 import { AuthenticationService } from '../core/authentication/authentication.service';
@@ -6,26 +6,31 @@ import { RestServerService } from '../core/restserver.service';
 import { NavigatorService } from '../core/navigator.service';
 import { PageService } from '../core/pages.service';
 import { Pages } from '../core/models/pages';
-import { Observable } from 'rxjs/Rx';
-import * as $ from 'jquery';
-import { TranslatePipe } from 'ng2-translate';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   providers: [],
   styleUrls: [ './home.component.css' ],
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
-  public logo: string = 'assets/img/logo.png';
+export class HomeComponent implements OnInit, OnDestroy {
+  public logo = 'assets/img/logo.png';
   public pages: Pages = null;
 
-  constructor(public appState: AppState, private router: Router, private restServerService: RestServerService, public navigatorService: NavigatorService, private pageService: PageService) {
+  public mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
+  constructor(public appState: AppState, private router: Router, private restServerService: RestServerService,
+    public navigatorService: NavigatorService, private pageService: PageService,
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   public ngOnInit() {
     console.log('home component loaded');
-    this.initializeSidenav();
 
     this.pageService.getAll()
     .then( (pages: Pages) => {
@@ -33,16 +38,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /**
-   * Initialize sidenav
-   */
-  private initializeSidenav() {
-    $('.button-collapse').sideNav({
-      menuWidth: 240, // Default is 240
-      closeOnClick: true
-    });
-
-    // make all collapsible items behaviors
-    $('.collapsible').collapsible();
+  public ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
 }

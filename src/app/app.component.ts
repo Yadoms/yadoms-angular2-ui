@@ -1,46 +1,57 @@
-/*
- * Angular 2 decorators and services
- */
+import { DateAdapter } from '@angular/material/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppState } from './app.service';
-import { TranslateService, TranslatePipe } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import fontawesome from 'font-awesome-webpack2';
-import { SdBs2BrowseComponent } from 'core';
 
-/*
+/**
  * App Component
  * Top Level Component
  */
 @Component({
-  selector: 'app',
+  selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
+  /**
+   * Path to nse logo
+   */
   public nseLogo = 'assets/img/nse.png';
-  public name = 'Yadoms';
 
-  constructor(public appState: AppState, translate: TranslateService) {
-    // this language will be used as a fallback
-    translate.setDefaultLang('en');
+  /**
+   * Application name
+   */
+  public name = 'GSS Mobile';
 
-    // the lang to use, if the lang isn't available
-    translate.use(translate.getBrowserLang());
+  /**
+   * Constructor
+   * @param appState The appState
+   * @param translate The translate service
+   */
+  constructor(public appState: AppState, translate: TranslateService, private dateAdapter: DateAdapter<any>) {
+    try {
+      // this language will be used as a fallback
+      translate.setDefaultLang('en');
+      // the lang to use, if the lang isn't available
+      translate.use(translate.getBrowserLang());
+      // define app language
+      moment.locale(translate.getBrowserLang() || window.navigator.language || 'en');
 
-    moment.locale(translate.getBrowserLang() || window.navigator.language || 'en');
+      dateAdapter.setLocale(translate.getBrowserLang() || window.navigator.language || 'en');
+    } catch (e) {
+      console.error('Fail to initialize locale');
+      console.error(e);
+    }
   }
 
+  /**
+   * Initialize component
+   */
   public ngOnInit() {
+    // log initial appState
     console.log('Initial App State', this.appState.state);
   }
 }
-
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */
