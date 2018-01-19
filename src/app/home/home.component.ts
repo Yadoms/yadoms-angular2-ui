@@ -15,7 +15,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public logo = 'assets/img/logo.png';
   public pages: Pages = null;
 
   public mobileQuery: MediaQueryList;

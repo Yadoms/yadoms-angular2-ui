@@ -3,7 +3,7 @@
         "dashboard" : "Tableau de bord",
         "customize" : "Personnaliser",
         "administration" : "Administration",
-        "configuration": "Configuration système",
+        "system": "Système",
         "plugins" : "Plugins",
         "devices": "Equipements",
         "automation" : "Automatisation",

@@ -1,18 +1,31 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div class="yadoms-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  <mat-toolbar color="primary" class="example-toolbar">
+  <mat-toolbar color="primary" class="yadoms-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">Yadoms</h1>
+    <img src="/assets/img/logo.png" />
+    <h1 class="yadoms-app-name">Yadoms</h1>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  <mat-sidenav-container class="yadoms-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <h3 mat-subheader><img [src]="nseLogo" /></h3>
+        
         <a mat-list-item [routerLink]=" ['dashboard'] " routerLinkActive="active"><mat-icon>dashboard</mat-icon>{{'sidenav.dashboard' | translate }}</a>
         
         <a *ngFor="let p of pages?.page" mat-list-item [routerLink]="['/home/page/' + p.id]" routerLinkActive="active"><mat-icon>{{p.icon}}</mat-icon>{{p.name}}</a>        
+
+        <h3 mat-subheader>{{'sidenav.administration' | translate }}</h3>
+        <a mat-list-item [routerLink]=" ['configuration'] " routerLinkActive="active"><mat-icon>settings_applications</mat-icon>{{'sidenav.configuration' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['plugins'] " routerLinkActive="active"><mat-icon>extension</mat-icon>{{'sidenav.plugins' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['devices'] " routerLinkActive="active"><mat-icon>devices_other</mat-icon>{{'sidenav.devices' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['automation'] " routerLinkActive="active"><mat-icon>play_circle_outline</mat-icon>{{'sidenav.automation' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['recipients'] " routerLinkActive="active"><mat-icon>mail</mat-icon>{{'sidenav.recipients' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['update'] " routerLinkActive="active"><mat-icon>update</mat-icon>{{'sidenav.update' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['maintenance'] " routerLinkActive="active"><mat-icon>healing</mat-icon>{{'sidenav.maintenance' | translate }}</a>
+        <a mat-list-item [routerLink]=" ['about'] " routerLinkActive="active"><mat-icon>info</mat-icon>{{'sidenav.about' | translate }}</a>
+    
       </mat-nav-list>
+
     </mat-sidenav>
 
     <mat-sidenav-content>

@@ -1,28 +1,17 @@
 var express = require('express');
-var csrf = require('csurf');
 var app = express();
 var fs = require('fs');
 var _ = require('lodash');
 
 var router = express.Router();
 
-router.use(csrf());
-
-router.use(function(req, res, next) {
-  res.locals._csrf = req.csrfToken();
-  next();
-});
-
 
 //add CORS
 router.use(function (req, res, next) {
-    console.log('request');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-
 
 
 function generateSuccess(data) {
