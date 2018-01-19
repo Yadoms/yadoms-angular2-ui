@@ -18,6 +18,14 @@ import { MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter } from 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppDateAdapter } from './../app.dates';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SystemComponent } from './administration/system/system.component';
+import { PluginsComponent } from './administration/plugins/plugins.component';
+import { DevicesComponent } from './administration/devices/devices.component';
+import { AutomationComponent } from './administration/automation/automation.component';
+import { RecipientsComponent } from './administration/recipients/recipients.component';
+import { UpdateComponent } from './administration/update/update.component';
+import { MaintenanceComponent } from './administration/maintenance/maintenance.component';
+import { AboutComponent } from './administration/about/about.component';
 
 @NgModule({
     imports: [CommonModule, routing, TranslateModule, SharedModule, NgxPageScrollModule,
@@ -30,7 +38,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatPseudoCheckboxModule, MatProgressSpinnerModule,
         FlexLayoutModule],
     exports: [],
-    declarations: [ HomeComponent, PageComponent ],
+    declarations: [ HomeComponent, PageComponent, SystemComponent, PluginsComponent, DevicesComponent, AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent ],
     providers: [
         { provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },

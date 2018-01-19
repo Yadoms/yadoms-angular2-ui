@@ -37,3 +37,7 @@ h1.yadoms-app-name {
   margin-bottom: 0;
   z-index: 997;
 }
+
+.yadoms-logo {
+  height: 48px;
+}
