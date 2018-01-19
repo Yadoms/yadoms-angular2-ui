@@ -4,6 +4,8 @@ import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
 import 'rxjs/add/operator/switchMap';
 import * as Packery from 'packery-rows';
+import { WidgetService } from 'app/core/widgets.service';
+import { Widgets } from 'app/core/models/widgets';
 
 @Component({
     selector: 'app-page',
@@ -14,12 +16,17 @@ import * as Packery from 'packery-rows';
 export class PageComponent implements OnInit {
     @Input() public data: Page;
 
-    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService, 
-        private componentFactoryResolver: ComponentFactoryResolver) {
+    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService,
+        private componentFactoryResolver: ComponentFactoryResolver, private widgetService: WidgetService) {
     }
 
     public ngOnInit() {
         this.initializeComponentFromRoute();
+
+        this.widgetService.getForPage(this.data.id)
+        .then( (widgets: Widgets) => {
+
+        });
 
         const pckry = new Packery( '.grid', {
             // options

@@ -26,6 +26,7 @@ import { RecipientsComponent } from './administration/recipients/recipients.comp
 import { UpdateComponent } from './administration/update/update.component';
 import { MaintenanceComponent } from './administration/maintenance/maintenance.component';
 import { AboutComponent } from './administration/about/about.component';
+import { WidgetComponent } from './widget/widget.component';
 
 @NgModule({
     imports: [CommonModule, routing, TranslateModule, SharedModule, NgxPageScrollModule,
@@ -38,7 +39,7 @@ import { AboutComponent } from './administration/about/about.component';
         MatPseudoCheckboxModule, MatProgressSpinnerModule,
         FlexLayoutModule],
     exports: [],
-    declarations: [ HomeComponent, PageComponent, SystemComponent, PluginsComponent, DevicesComponent, AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent ],
+    declarations: [ HomeComponent, PageComponent, SystemComponent, PluginsComponent, DevicesComponent, AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent, WidgetComponent ],
     providers: [
         { provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
