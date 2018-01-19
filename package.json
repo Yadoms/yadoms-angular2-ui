@@ -72,6 +72,7 @@
     "ngx-cookie": "^2.0.1",
     "ngx-infinite-scroll": "^0.8.2",
     "ngx-page-scroll": "^4.0.2",
+    "packery-rows": "^2.1.4",
     "rxjs": "5.5.6",
     "velocity-animate": "^1.5.1",
     "zone.js": "0.8.20"

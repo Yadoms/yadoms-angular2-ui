@@ -43,7 +43,7 @@ import * as _ from 'lodash'
  *
  */
 
-// support NodeJS modules without type definitions
+ // support NodeJS modules without type definitions
 declare module '*';
 
 /*
@@ -128,3 +128,5 @@ interface ErrorConstructor extends ErrorStackTraceLimit {}
 interface NodeRequireFunction extends Es6PromiseLoader  {}
 interface NodeModule extends WebpackModule {}
 interface Global extends GlobalEnvironment  {}
+
+declare var Packery: any;

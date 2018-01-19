@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
 import 'rxjs/add/operator/switchMap';
+import * as Packery from 'packery-rows';
 
 @Component({
     selector: 'app-page',
@@ -13,11 +14,18 @@ import 'rxjs/add/operator/switchMap';
 export class PageComponent implements OnInit {
     @Input() public data: Page;
 
-    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService, private componentFactoryResolver: ComponentFactoryResolver) {
+    constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService, 
+        private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
     public ngOnInit() {
         this.initializeComponentFromRoute();
+
+        const pckry = new Packery( '.grid', {
+            // options
+            itemSelector: '.grid-item',
+            gutter: 10
+        });
     }
 
     /**
