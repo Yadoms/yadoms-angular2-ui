@@ -35,7 +35,8 @@
     "e2e": "ng e2e",
     "docs": "compodoc -p tsconfig.json --name GSSMobile --hideGenerator --assetsFolder ./src/assets/img",
     "docker": "docker",
-    "docker:build": "docker build -t node-chrome-angularcli ."
+    "docker:build": "docker build -t node-chrome-angularcli .",
+    "aa": "tsc --lib es2016,dom --experimentalDecorators true --emitDecoratorMetadata true --outDir src/assets/widgets src/assets/widgets/numeric-display/lazy.module.ts"
   },
   "private": true,
   "dependencies": {

@@ -6,6 +6,7 @@ import * as Packery from 'packery-rows';
 import { WidgetService } from '../../core/widgets.service';
 import { Widgets } from '../../core/models/widgets';
 import { switchMap } from 'rxjs/operators';
+import { Widget } from '../../core/models/widget';
 
 @Component({
     selector: 'app-page',
@@ -53,12 +54,13 @@ export class PageComponent implements OnInit {
             });
     }
 
+    public widgets: Widget[] = [];
+    
     private initializeWidgets() {
         if(this.data && this.data.id) {
             this.widgetService.getForPage(this.data.id)
             .then( (widgets: Widgets) => {
-                debugger;
-    
+                this.widgets = widgets.widget;
             });
         }
     }

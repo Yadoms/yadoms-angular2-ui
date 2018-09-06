@@ -1,7 +1,5 @@
 <p>Page {{data?.name}}</p>
 
 <div class="grid">
-  <div class="grid-item">ItemA</div>
-  <div class="grid-item grid-item-width2">ItemB</div>
-  <div class="grid-item">ItemC</div>
+  <app-widget class="grid-item" *ngFor="let l of widgets" [configuration]="l"></app-widget>
 </div>
