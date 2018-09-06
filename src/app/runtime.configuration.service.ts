@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptionsArgs, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/share';
+import { Http, Response } from '@angular/http';
+import { share } from 'rxjs/operators';
 
 /**
  * Interface for the RuntimeConfiguration
@@ -54,7 +54,7 @@ export class RuntimeConfigurationService {
                 console.log('Loading configuration from : ' + this.configFileName);
                 this .http
                     .request(this.configFileName)
-                    .share()
+                    .pipe(share())
                     .subscribe( (res: Response) => {
                         try {
                             const readCfg = res.json();

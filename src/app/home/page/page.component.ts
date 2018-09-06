@@ -2,10 +2,11 @@ import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/cor
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
-import 'rxjs/add/operator/switchMap';
 import * as Packery from 'packery-rows';
-import { WidgetService } from 'app/core/widgets.service';
-import { Widgets } from 'app/core/models/widgets';
+import { WidgetService } from '../../core/widgets.service';
+import { Widgets } from '../../core/models/widgets';
+import { switchMap } from 'rxjs/operators';
+import { Widget } from '../../core/models/widget';
 
 @Component({
     selector: 'app-page',
@@ -21,18 +22,14 @@ export class PageComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.initializeComponentFromRoute();
-
-        this.widgetService.getForPage(this.data.id)
-        .then( (widgets: Widgets) => {
-
-        });
 
         const pckry = new Packery( '.grid', {
             // options
             itemSelector: '.grid-item',
             gutter: 10
         });
+
+        this.initializeComponentFromRoute();
     }
 
     /**
@@ -43,14 +40,28 @@ export class PageComponent implements OnInit {
     private initializeComponentFromRoute() {
         this.route
             .paramMap
-            .switchMap((params: ParamMap) => {
+            .pipe(switchMap((params: ParamMap) => {
                 const idFromUrl = params.get('id');
                 if (!idFromUrl) {
                     return this.pageService.getFirst();
                 } else {
                     return this.pageService.get(+idFromUrl); // convert idFromUrl to number with '+'
                 }
-            })
-            .subscribe((p: Page) => this.data = p);
+            }))
+            .subscribe((p: Page) => {
+                this.data = p;
+                this.initializeWidgets();
+            });
+    }
+
+    public widgets: Widget[] = [];
+    
+    private initializeWidgets() {
+        if(this.data && this.data.id) {
+            this.widgetService.getForPage(this.data.id)
+            .then( (widgets: Widgets) => {
+                this.widgets = widgets.widget;
+            });
+        }
     }
 }

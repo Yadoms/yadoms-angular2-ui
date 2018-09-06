@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../app.service';
-import { AuthenticationService } from '../core/authentication/authentication.service';
 import { RestServerService } from '../core/restserver.service';
 import { NavigatorService } from '../core/navigator.service';
 import { PageService } from '../core/pages.service';
