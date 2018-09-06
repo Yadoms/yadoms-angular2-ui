@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, Http } from '@angular/http';
-import { NgModule, ApplicationRef, APP_INITIALIZER } from '@angular/core';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { HttpModule } from '@angular/http';
+import { NgModule,  APP_INITIALIZER } from '@angular/core';
 import { RouterModule, PreloadAllModules, RouteReuseStrategy } from '@angular/router';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -25,7 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
-import { AppState, InternalStateType } from './app.service';
+import { AppState } from './app.service';
 import { NoContentComponent } from './no-content';
 import { CheckServerComponent } from './check/check-server.component';
 import { CoreModule } from './core';
