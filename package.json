@@ -36,8 +36,7 @@
     "docs": "compodoc -p tsconfig.json --name GSSMobile --hideGenerator --assetsFolder ./src/assets/img",
     "docker": "docker",
     "docker:build": "docker build -t node-chrome-angularcli .",
-    "widgets": "tsc -p src/widgets",
-    "help": "tsc --help"
+    "widgets": "tsc -p src/widgets"
   },
   "private": true,
   "dependencies": {
@@ -76,8 +75,8 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.5",
-    "@angular/cli": "~6.1.5",
+    "@angular-devkit/build-angular": "~0.8.1",
+    "@angular/cli": "~6.2.1",
     "@angular/compiler-cli": "^6.1.7",
     "@angular/language-service": "^6.1.7",
     "@types/jasmine": "~2.8.8",

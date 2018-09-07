@@ -1,112 +1,105 @@
 {
-    "widget": [
-        {
-            "id": "8",
-            "idPage": "1",
-            "type": "numeric-display",
-            "sizeX": "100",
-            "sizeY": "100",
-            "position": "0",
-            "title": "Temp 1",
-            "configuration": {
-                "device": {
-                    "deviceId": "32",
-                    "keywordId": "62"
-                },
-                "dateDisplay": "true"
-            }
-        },
-        {
-            "id": "11",
-            "idPage": "2",
-            "type": "chart",
-            "sizeX": "700",
-            "sizeY": "300",
-            "position": "0",
-            "title": "",
-            "configuration": {
-                "interval": "DAY",
-                "legends": {
-                    "content": {
-                        "legendLabels": "DeviceAndKeyword"
-                    },
-                    "checkbox": "true"
-                },
-                "oneAxis": {
-                    "content": {
-                        "customYAxisMinMax": {
-                            "content": {
-                                "minimumValue": "0.0",
-                                "maximumValue": "100.0"
-                            },
-                            "checkbox": "false"
-                        }
-                    },
-                    "checkbox": "false"
-                },
-                "devices": [
-                    {
-                        "content": {
-                            "source": {
-                                "deviceId": "32",
-                                "keywordId": "62"
-                            },
-                            "color": "#0000ff",
-                            "advancedConfiguration": {
-                                "content": {
-                                    "differentialDisplay": "absolute",
-                                    "periodtype": "avg"
-                                },
-                                "checkbox": "false"
-                            },
-                            "PlotType": "line"
-                        }
-                    },
-                    {
-                        "content": {
-                            "source": {
-                                "deviceId": "33",
-                                "keywordId": "74"
-                            },
-                            "color": "#c25151",
-                            "advancedConfiguration": {
-                                "content": {
-                                    "differentialDisplay": "absolute",
-                                    "periodtype": "avg"
-                                },
-                                "checkbox": "false"
-                            },
-                            "PlotType": "arearange"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "id": "9",
-            "idPage": "1",
-            "type": "numeric-display",
-            "sizeX": "100",
-            "sizeY": "100",
-            "position": "1",
-            "title": "Temp 2",
-            "configuration": {
-                "device": {
-                    "deviceId": "33",
-                    "keywordId": "74"
-                },
-                "dateDisplay": "true"
-            }
-        },
-        {
-            "id": "10",
-            "idPage": "2",
-            "type": "clock",
-            "sizeX": "100",
-            "sizeY": "100",
-            "position": "1",
-            "title": "",
-            "configuration": ""
+    "widget": [{
+        "id": "1",
+        "idPage": "1",
+        "type": "numeric-display",
+        "sizeX": "100",
+        "sizeY": "100",
+        "position": "0",
+        "title": "Disk C",
+        "configuration": {
+            "device": {
+                "deviceId": "4",
+                "keywordId": "9"
+            },
+            "precision": "1",
+            "dateDisplay": "false"
         }
-    ]
+    }, {
+        "id": "4",
+        "idPage": "2",
+        "type": "state-display",
+        "sizeX": "200",
+        "sizeY": "100",
+        "position": "0",
+        "title": "",
+        "configuration": {
+            "device": {
+                "deviceId": "3",
+                "keywordId": "5"
+            }
+        }
+    }, {
+        "id": "2",
+        "idPage": "1",
+        "type": "numeric-display",
+        "sizeX": "100",
+        "sizeY": "100",
+        "position": "1",
+        "title": "",
+        "configuration": {
+            "device": {
+                "deviceId": "4",
+                "keywordId": "7"
+            },
+            "precision": "1",
+            "dateDisplay": "false"
+        }
+    }, {
+        "id": "5",
+        "idPage": "2",
+        "type": "chart",
+        "sizeX": "900",
+        "sizeY": "300",
+        "position": "1",
+        "title": "",
+        "configuration": {
+            "interval": "HOUR\/minute",
+            "legends": {
+                "content": {
+                    "legendLabels": "DeviceAndKeyword"
+                },
+                "checkbox": "true"
+            },
+            "oneAxis": {
+                "content": {
+                    "customYAxisMinMax": {
+                        "content": {
+                            "minimumValue": "0.0",
+                            "maximumValue": "100.0"
+                        },
+                        "checkbox": "false"
+                    }
+                },
+                "checkbox": "false"
+            },
+            "devices": [{
+                "content": {
+                    "source": {
+                        "deviceId": "4",
+                        "keywordId": "7"
+                    },
+                    "color": "#0000ff",
+                    "advancedConfiguration": {
+                        "content": {
+                            "precision": "1",
+                            "differentialDisplay": "absolute",
+                            "periodtype": "avg"
+                        },
+                        "checkbox": "false"
+                    },
+                    "PlotType": "line"
+                }
+            }]
+        }
+    }, {
+        "id": "3",
+        "idPage": "1",
+        "type": "clock",
+        "sizeX": "300",
+        "sizeY": "100",
+        "position": "2",
+        "title": "",
+        "configuration": ""
+    }]
 }

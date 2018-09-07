@@ -21,7 +21,7 @@ export class WidgetComponent implements OnInit {
 
   ngOnInit() {
     this.config = JSON.stringify(this.configuration.configuration);
-    this._wfs.load('assets/widgets/lazy.module.js', this._vcr)
+    this._wfs.load('assets/widgets/numeric-display/numeric-display.js', this._vcr)
     .then( (componentRef)=>{ 
       debugger;
       componentRef.instance.data = this.configuration;
