@@ -1,7 +1,11 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input, Compiler, Injector, Directive  } from '@angular/core';
 import { ViewContainerRef, ViewChild } from '@angular/core';
 
 import { WidgetFactoryService } from '../../core/widget.factory.service';
+import * as AngularCore from '@angular/core';
+import * as AngularCommon from '@angular/common';
+import { PluginHostDirective } from './plugin-host.directive';
+
 
 @Component({
   selector: 'app-widget',
@@ -10,23 +14,21 @@ import { WidgetFactoryService } from '../../core/widget.factory.service';
 })
 export class WidgetComponent implements OnInit {
 
-  @ViewChild('pluginHost') pluginHost;
+  @ViewChild(PluginHostDirective) pluginHost: PluginHostDirective;
 
   @Input() configuration;
 
-  constructor(private _wfs: WidgetFactoryService, private _vcr: ViewContainerRef) {
+  constructor(private _wfs: WidgetFactoryService) {
   }
 
-  public config: string;
 
   ngOnInit() {
-    this.config = JSON.stringify(this.configuration.configuration);
-    this._wfs.load('assets/widgets/numeric-display/numeric-display.js', this._vcr)
+    //this.config = JSON.stringify(this.configuration.configuration);
+
+    this._wfs.load({ name: 'numeric-display', module:'PluginModule', componentSelector:'app-plugin-component' }, this.pluginHost.viewContainerRef)
     .then( (componentRef)=>{ 
-      debugger;
       componentRef.instance.data = this.configuration;
     } );
     
   }
-
 }
