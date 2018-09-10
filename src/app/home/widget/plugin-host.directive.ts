@@ -4,8 +4,6 @@ import { Directive, ViewContainerRef } from '@angular/core';
   selector: '[appPluginHost]'
 })
 export class PluginHostDirective {
-
-  constructor(public viewContainerRef: ViewContainerRef) { 
-    
-  }  
+  constructor(public viewContainerRef: ViewContainerRef) {
+  }
 }

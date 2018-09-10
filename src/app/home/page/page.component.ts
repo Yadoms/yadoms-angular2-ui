@@ -16,6 +16,7 @@ import { Widget } from '../../core/models/widget';
 
 export class PageComponent implements OnInit {
     @Input() public data: Page;
+    public widgets: Widget[] = [];
 
     constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService,
         private componentFactoryResolver: ComponentFactoryResolver, private widgetService: WidgetService) {
@@ -54,10 +55,8 @@ export class PageComponent implements OnInit {
             });
     }
 
-    public widgets: Widget[] = [];
-    
     private initializeWidgets() {
-        if(this.data && this.data.id) {
+        if (this.data && this.data.id) {
             this.widgetService.getForPage(this.data.id)
             .then( (widgets: Widgets) => {
                 this.widgets = widgets.widget;

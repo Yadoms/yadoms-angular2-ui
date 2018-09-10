@@ -66,7 +66,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules, enableTracing: false }),
     TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),

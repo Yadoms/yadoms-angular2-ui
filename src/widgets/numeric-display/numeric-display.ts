@@ -11,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class PluginComponent implements OnInit {
-  type: "PluginComponent";
-  data: string = "Hello!";
+  type: 'PluginComponent';
+  data = 'Hello!';
 
   ngOnInit() {
   }

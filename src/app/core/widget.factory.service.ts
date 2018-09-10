@@ -4,54 +4,111 @@ import { ViewContainerRef, ViewChild } from '@angular/core';
 import * as AngularCore from '@angular/core';
 import * as AngularCommon from '@angular/common';
 import { Injectable } from '@angular/core';
+import { delay } from 'q';
+import { WidgetDefinition } from './models/widget.defition';
 
-export interface PluginDefinition {
-  name: string;
-  module: string;
-  componentSelector: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetFactoryService {
-  private injector: Injector;
+  /**
+   * The module compiler (will compile and digest it as module/components)
+   */
   private compiler: Compiler;
 
-  private widgetBasePath = "assets/widgets/";
+  /**
+   * The widget base path
+   */
+  private widgetBasePath = 'assets/widgets/';
 
+  /**
+   * The mutex state (false: unlock, true: locked)
+   */
+  private mutexLocked = false;
+
+  /**
+   * The widget factories already loaded (avoid multiple loading)
+   */
+  private loadedComponentFactories: Map<string, AngularCore.ComponentFactory<any>> = new Map<string, AngularCore.ComponentFactory<any>>();
+
+  /**
+   * Constructr
+   * @param injector The injector instance
+   */
   constructor(injector: Injector) {
-    this.injector = injector;
-    this.compiler = this.injector.get(Compiler);
+    this.compiler = injector.get(Compiler);
   }
 
-  public load(pluginDef: PluginDefinition, componentHostView: ViewContainerRef): Promise<AngularCore.ComponentRef<any>> {
-    return new Promise<AngularCore.ComponentRef<any>>((resolve: (value?: AngularCore.ComponentRef<any>) => void, reject: (reason?: any) => void) => {
+  /**
+   * Load a widget and instanciate a coponant
+   *
+   * This method is mutexed => to enhance performances method should not be called simultaneously
+   * @param widgetDefinition The definition
+   * @param componentHostView The view where component will be placed
+   */
+  public async load(widgetDefinition: WidgetDefinition, componentHostView: ViewContainerRef): Promise<AngularCore.ComponentRef<any>> {
 
-      const href = this.widgetBasePath + pluginDef.name + "/" + pluginDef.name + ".js";
+    // get the mutex
+    while (this.mutexLocked) {
+      await delay(10);
+    }
+    this.mutexLocked = true;
 
-      fetch(href)
-        .then(response => response.text())
-        .then(source => {
-          const exports = {}; // this will hold module exports
-          const modules = {   // this is the list of modules accessible by plugin
-            '@angular/core': AngularCore,
-            '@angular/common': AngularCommon
-          };
+    try {
+      // get/create the component factory (async load widget files if needed...)
+      const componentFactory = await this.getComponentFactory(widgetDefinition);
+      if (componentFactory) {
+        // clear destintation place
+        componentHostView.clear();
 
-          const require = (module) => modules[module]; // shim 'require'
-          eval(source); // interpret the plugin source
-          const mwcf = this.compiler.compileModuleAndAllComponentsSync(exports[pluginDef.module]);
+        // instanciate the component
+        const componentRef = componentHostView.createComponent(componentFactory);
 
-          const componentFactory = mwcf.componentFactories.find(e => e.selector === pluginDef.componentSelector); // find the entry component
-          if (componentFactory) {
-            componentHostView.clear();
+        // release mutex
+        this.mutexLocked = false;
+        return componentRef;
+      } else {
+        this.mutexLocked = false;
+        throw new Error('cannot find factory for app-plugin-component');
+      }
+    } catch (error) {
+      this.mutexLocked = false;
+      throw error;
+    }
 
-            const componentRef = componentHostView.createComponent(componentFactory);
-            resolve(componentRef);
-          }
-          reject('cannot find factory for app-plugin-component');
-        });
-    });
+  }
+
+  /**
+   * Get the component factory for the widget to load
+   * @param widgetDefinition The definition
+   */
+  private async getComponentFactory(widgetDefinition: WidgetDefinition): Promise<AngularCore.ComponentFactory<any>> {
+    if (this.loadedComponentFactories.has(widgetDefinition.name)) {
+      return this.loadedComponentFactories.get(widgetDefinition.name);
+    } else {
+      const href = this.widgetBasePath + widgetDefinition.name + '/' + widgetDefinition.name + '.js';
+
+      const response = await fetch(href);
+      const source = await response.text();
+
+      const exports = {}; // this will hold module exports
+      const modules = {   // this is the list of modules accessible by plugin
+        '@angular/core': AngularCore,
+        '@angular/common': AngularCommon
+      };
+
+      const require = (module) => modules[module]; // shim 'require'
+      eval(source); // interpret the plugin source
+      const mwcf = this.compiler.compileModuleAndAllComponentsSync(exports[widgetDefinition.module]);
+
+      const componentFactory = mwcf.componentFactories.find(e => e.selector === widgetDefinition.componentSelector); // find the entry component
+      if (componentFactory) {
+        this.loadedComponentFactories.set(widgetDefinition.name, componentFactory);
+        return componentFactory;
+      } else {
+        throw new Error('cannot find factory for app-plugin-component');
+      }
+    }
   }
 }
