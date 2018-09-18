@@ -1,17 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  inject,
-  async,
-  TestBed,
-  ComponentFixture
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import {
-  BaseRequestOptions,
-  ConnectionBackend,
-  Http
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { async, ComponentFixture } from '@angular/core/testing';
+// Other imports
+import { TestBed } from '@angular/core/testing';
 
 // Load the implementations that should be tested
 import { AppState } from '../app.service';
@@ -27,19 +17,10 @@ describe(`Home`, () => {
       declarations: [HomeComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        },
         AppState
       ]
     })
-    .compileComponents(); // compile template and css
+      .compileComponents(); // compile template and css
   }));
 
   // synchronous beforeEach

@@ -99,6 +99,9 @@ export class WidgetFactoryService {
       };
 
       const require = (module) => modules[module]; // shim 'require'
+
+      // eval is mandatory here, just disable linting for this line
+      // tslint:disable-next-line:no-eval
       eval(source); // interpret the plugin source
       const mwcf = this.compiler.compileModuleAndAllComponentsSync(exports[widgetDefinition.module]);
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { share } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Interface for the RuntimeConfiguration
@@ -42,7 +43,7 @@ export class RuntimeConfigurationService {
      * Constructor
      * @param http The http service (dependency injection)
      */
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     /**
@@ -53,11 +54,10 @@ export class RuntimeConfigurationService {
             if (this.currentConfiguration === null) {
                 console.log('Loading configuration from : ' + this.configFileName);
                 this .http
-                    .request(this.configFileName)
+                    .get<RuntimeConfiguration>(this.configFileName)
                     .pipe(share())
-                    .subscribe( (res: Response) => {
+                    .subscribe( (readCfg: RuntimeConfiguration) => {
                         try {
-                            const readCfg = res.json();
                             this.currentConfiguration = readCfg;
                             console.log(readCfg);
                             resolve(this.currentConfiguration);
