@@ -6,19 +6,20 @@ import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
 import * as moment from 'moment';
 import { AppComponent } from './app.component';
 import { AppState } from './app.service';
-import { SdBs2Service } from './core/sdbs2/sdbs2.service';
 import { CoreModule } from './core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SharedModule } from './shared';
 import { CommonModule } from '@angular/common';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { AppDateAdapter } from './app.dates';
+import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),
 describe(`AppComponent`, () => {
   let comp: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -35,7 +36,10 @@ describe(`AppComponent`, () => {
       providers: [AppState,
         TranslateModule,
         SharedModule,
-        CommonModule]
+        CommonModule, 
+        { provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+      ]
     })
     .compileComponents(); // compile template and css
   }));
@@ -51,19 +55,6 @@ describe(`AppComponent`, () => {
   it(`should be readly initialized`, () => {
     expect(fixture).toBeDefined();
     expect(comp).toBeDefined();
-  });
-
-  it(`should be NSE`, () => {
-    expect(comp.nseLogo).toEqual('assets/img/nse.png');
-    expect(comp.name).toEqual('GSS Mobile');
-  });
-
-  it('should log ngOnInit', () => {
-    spyOn(console, 'log');
-    expect(console.log).not.toHaveBeenCalled();
-
-    comp.ngOnInit();
-    expect(console.log).toHaveBeenCalled();
   });
 
 });
