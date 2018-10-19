@@ -20,16 +20,8 @@ import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {YdDateAdapter} from '../yd.dates';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AdminPageComponent} from './administration/admin-page/admin-page.component';
-import {SystemComponent} from './administration/system/system.component';
-import {PluginsComponent} from './administration/plugins/plugins.component';
-import {DevicesComponent} from './administration/devices/devices.component';
-import {AutomationComponent} from './administration/automation/automation.component';
-import {RecipientsComponent} from './administration/recipients/recipients.component';
-import {UpdateComponent} from './administration/update/update.component';
-import {MaintenanceComponent} from './administration/maintenance/maintenance.component';
-import {AboutComponent} from './administration/about/about.component';
 import {WidgetComponent} from './widget/widget.component';
+import {AdministrationModule} from './administration/administration.module';
 
 @NgModule({
   imports: [CommonModule, routing, TranslateModule, SharedModule, NgxPageScrollModule,
@@ -40,10 +32,9 @@ import {WidgetComponent} from './widget/widget.component';
     MatSliderModule, MatSidenavModule, MatStepperModule, MatToolbarModule, MatTooltipModule, MatGridListModule, MatExpansionModule,
     MatFormFieldModule, MatPaginatorModule, MatDatepickerModule, MatMomentDateModule, MatProgressBarModule, MatSlideToggleModule,
     MatPseudoCheckboxModule, MatProgressSpinnerModule,
-    FlexLayoutModule],
+    FlexLayoutModule, AdministrationModule],
   exports: [],
-  declarations: [HomeComponent, PageComponent, AdminPageComponent, SystemComponent, PluginsComponent, DevicesComponent,
-    AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent, WidgetComponent],
+  declarations: [HomeComponent, PageComponent, WidgetComponent],
   providers: [
     {provide: DateAdapter, useValue: YdDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
