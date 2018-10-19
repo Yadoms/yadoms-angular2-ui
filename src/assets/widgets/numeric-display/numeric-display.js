@@ -17,7 +17,7 @@ var PluginComponent = /** @class */ (function () {
     };
     PluginComponent = __decorate([
         core_2.Component({
-            selector: 'app-plugin-component',
+            selector: 'yd-plugin-component',
             template: "\n    <p>\n      lazy works! {{data}}\n    </p>\n  "
         })
     ], PluginComponent);

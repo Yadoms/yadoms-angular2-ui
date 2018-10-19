@@ -1,5 +1,5 @@
 var express = require('express');
-var app = express();
+var yd = express();
 var fs = require('fs');
 var _ = require('lodash');
 
@@ -68,9 +68,9 @@ router.get('/widget', function(req, res) {
 
 
 
-app.use('/rest', router);
+yd.use('/rest', router);
 
-var server = app.listen(8088, function() {
+var server = yd.listen(8088, function() {
     var host = server.address().address;
     var port = server.address().port;
 

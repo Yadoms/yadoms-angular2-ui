@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-plugin-component',
+  selector: 'yd-plugin-component',
   template: `
     <p>
       lazy works! {{data}}
