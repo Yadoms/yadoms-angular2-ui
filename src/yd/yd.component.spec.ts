@@ -51,8 +51,8 @@ describe(`AppComponent`, () => {
     expect(comp).toBeDefined();
   });
 
-  it(`should be NSE`, () => {
-    expect(comp.nseLogo).toEqual('assets/img/nse.png');
+  it(`should be the Yadoms logo`, () => {
+    expect(comp.yadomsLogo).toEqual('assets/img/logo.png');
     expect(comp.name).toEqual('GSS Mobile');
   });
 

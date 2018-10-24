@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {AdminPageComponent} from './admin-page/admin-page.component';
+import {AdminPageHeaderComponent} from './admin-page-header/admin-page-header.component';
 
 import {SystemComponent} from './system/system.component';
 import {PluginsComponent} from './plugins/plugins.component';
@@ -16,7 +16,7 @@ import {AboutComponent} from './about/about.component';
   imports: [
     CommonModule
   ],
-  declarations: [AdminPageComponent, SystemComponent, PluginsComponent, DevicesComponent,
+  declarations: [AdminPageHeaderComponent, SystemComponent, PluginsComponent, DevicesComponent,
     AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent]
 })
 export class AdministrationModule {
