@@ -47,7 +47,7 @@ describe('AboutComponent', () => {
     expect(linksList[1].href).toEqual('https://github.com/Yadoms/yadoms/issues/');
     expect(linksList[1].target).toEqual('_blank');
     expect(linksList[1].textContent).toEqual('Report an issue');
-2
+
     expect(linksList[2].href).toEqual('https://github.com/Yadoms/yadoms/');
     expect(linksList[2].target).toEqual('_blank');
     expect(linksList[2].textContent).toEqual('Yadoms on Github');
