@@ -30,6 +30,7 @@ export class YdComponent implements OnInit {
    * Constructor
    * @param appState The appState
    * @param translate The translate service
+   * @param dateAdapter
    */
   constructor(public appState: AppState, translate: TranslateService, private dateAdapter: DateAdapter<any>) {
     try {

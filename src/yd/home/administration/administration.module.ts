@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MatIconModule, MatDividerModule, MatListModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AdminPageHeaderComponent} from './admin-page-header/admin-page-header.component';
 
@@ -14,7 +16,7 @@ import {AboutComponent} from './about/about.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, MatListModule, MatIconModule, HttpClientModule, MatDividerModule
   ],
   declarations: [AdminPageHeaderComponent, SystemComponent, PluginsComponent, DevicesComponent,
     AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent]

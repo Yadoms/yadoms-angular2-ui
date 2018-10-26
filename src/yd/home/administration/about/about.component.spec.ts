@@ -1,5 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import {AboutComponent} from './about.component';
 
@@ -13,7 +14,8 @@ describe('AboutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AboutComponent, YdAdminPageMockComponent]
+      declarations: [AboutComponent, YdAdminPageMockComponent],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
       .compileComponents();
   }));
@@ -35,9 +37,8 @@ describe('AboutComponent', () => {
 
   it('should display useful links', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('h2')[0].textContent).toEqual('Useful links');
-    const linksList = compiled.querySelectorAll('div a');
-    console.log('linksList =', linksList);
+    expect(compiled.querySelector('.useful-links h2').textContent).toEqual('Useful links');
+    const linksList = compiled.querySelectorAll('.useful-links div a');
     expect(Object.keys(linksList).length).toEqual(4);
 
     expect(linksList[0].href).toEqual('http://www.yadoms.com/');
@@ -55,5 +56,12 @@ describe('AboutComponent', () => {
     expect(linksList[3].href).toEqual('http://yadoms.com/forum/');
     expect(linksList[3].target).toEqual('_blank');
     expect(linksList[3].textContent).toEqual('Forum');
+  });
+
+  it('should display Yadoms dependencies', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.yadoms-uses h2').textContent).toEqual('Yadoms uses...');
+    const dependencyItems = compiled.querySelectorAll('mat-nav-list a');
+    expect(Object.keys(dependencyItems).length).toEqual(5);
   });
 });
