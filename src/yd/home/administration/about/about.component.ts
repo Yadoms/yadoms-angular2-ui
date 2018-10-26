@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {WidgetService} from '../../../core/widgets.service';
+import {Widgets} from '../../../core/models/widgets';
+import {Widget} from '../../../core/models/widget';
+import {WidgetPackages} from '../../../core/models/widget.packages';
 
 //TODO appliquer l'i18n
 
@@ -40,7 +44,14 @@ export class AboutComponent implements OnInit {
     //TODO compléter la liste avec les libs JS/TS utilisées
   ];
 
-  constructor() {
+  public yadomsWidgets: WidgetPackages;
+
+  constructor(private widgetService: WidgetService) {
+    this.widgetService.getAllPackages()
+      .then((packages: WidgetPackages) => {
+        this.yadomsWidgets = packages;
+        console.log(this.yadomsWidgets);
+      });
   }
 
   ngOnInit() {

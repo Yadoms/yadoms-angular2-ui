@@ -11,3 +11,19 @@
   height: auto;
   margin: 5px;
 }
+
+.widgets .type {
+font-size: 1em;
+  margin: 5px;
+}
+
+.widgets .author {
+  font-size: 0.8em;
+  margin: 5px;
+}
+
+.widgets .credits {
+  font-size: 0.6em;
+  margin: 5px;
+}
+

@@ -24,3 +24,37 @@
     </mat-nav-list>
   </div>
 </div>
+
+<div class="plugins">
+  <h2>Plugins</h2>
+  <div>
+    <!--TODO-->
+    <!--<mat-nav-list>-->
+      <!--<mat-list-item *ngFor="let plugins of yadomsPlugins">-->
+        <!--<a mat-list-item href="{{plugins.url}}" target='_blank'>-->
+          <!--<img *ngIf="plugins.icon" class="dependency-icon" src="{{plugins.icon}}">-->
+          <!--<mat-icon *ngIf="!plugins.icon" class="dependency-icon">extension</mat-icon>-->
+          <!--<span>{{ plugins.name }}</span>-->
+        <!--</a>-->
+      <!--</mat-list-item>-->
+    <!--</mat-nav-list>-->
+  </div>
+</div>
+
+<div class="widgets">
+  <h2>Widgets</h2>
+  <div>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let widgets of yadomsWidgets">
+        <a mat-list-item href="{{widgets.url}}" target='_blank'>
+          <img *ngIf="widgets.icon" class="dependency-icon" src="{{widgets.icon}}">
+          <mat-icon *ngIf="!widgets.icon" class="dependency-icon">extension</mat-icon>
+          <span class="type">{{ widgets.type }}</span>
+          <span class="author" *ngIf="widgets.author">by {{ widgets.author }}</span>
+          <span class="credits" *ngIf=" widgets.credits">credits {{ widgets.credits }}</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</div>
+
