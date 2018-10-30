@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
 import * as Packery from 'packery-rows';
-import { WidgetService } from '../../core/widgets.service';
+import { WidgetService } from '../../core/widget.service';
 import { Widgets } from '../../core/models/widgets';
 import { switchMap } from 'rxjs/operators';
 import { Widget } from '../../core/models/widget';

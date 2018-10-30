@@ -5,7 +5,7 @@ import { RestServerService } from './restserver.service';
 import { ErrorService } from './error.service';
 import { NavigatorService } from './navigator.service';
 import { PageService } from './pages.service';
-import { WidgetService } from '../core/widgets.service';
+import { WidgetService } from './widget.service';
 
 @NgModule({
   imports:      [ CommonModule ],

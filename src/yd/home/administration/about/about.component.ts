@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {WidgetService} from '../../../core/widgets.service';
-import {Widgets} from '../../../core/models/widgets';
-import {Widget} from '../../../core/models/widget';
+import {WidgetService} from '../../../core/widget.service';
+import {PluginService} from '../../../core/plugin.service';
 import {WidgetPackages} from '../../../core/models/widget.packages';
+import {AvailablePlugin} from '../../../core/models/available-plugin';
 
 //TODO appliquer l'i18n
 
@@ -45,12 +45,18 @@ export class AboutComponent implements OnInit {
   ];
 
   public yadomsWidgets: WidgetPackages;
+  public availablePlugins: AvailablePlugin[];
 
-  constructor(private widgetService: WidgetService) {
+  constructor(private widgetService: WidgetService, private pluginService: PluginService) {
     this.widgetService.getAllPackages()
       .then((packages: WidgetPackages) => {
         this.yadomsWidgets = packages;
-        console.log(this.yadomsWidgets);
+      });
+    this.pluginService.getAvailablePluginsPackage(['type', 'author', 'credits'])
+      .then((plugins: string[]) => { //TODO voir si on peut retourner un object plutôt qu'un string[][]
+        this.availablePlugins = plugins.map((plugin) => {
+          return {author: plugin['author'], type: plugin['type'], credits: plugin['credits']};
+        });
       });
   }
 

@@ -13,10 +13,12 @@ export class WidgetService {
   }
 
   public getAll(): Promise<Widgets> {
+    // TODO filtrer les 'dev-' si pas en mode développeur
     return this.restServerService.get<Widgets>('widget');
   }
 
   public getAllPackages(): Promise<WidgetPackages> {
+    // TODO filtrer les 'dev-' si pas en mode développeur
     return this.restServerService.get<WidgetPackages>('widget/package');
   }
 

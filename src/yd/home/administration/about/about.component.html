@@ -28,16 +28,17 @@
 <div class="plugins">
   <h2>Plugins</h2>
   <div>
-    <!--TODO-->
-    <!--<mat-nav-list>-->
-      <!--<mat-list-item *ngFor="let plugins of yadomsPlugins">-->
-        <!--<a mat-list-item href="{{plugins.url}}" target='_blank'>-->
-          <!--<img *ngIf="plugins.icon" class="dependency-icon" src="{{plugins.icon}}">-->
-          <!--<mat-icon *ngIf="!plugins.icon" class="dependency-icon">extension</mat-icon>-->
-          <!--<span>{{ plugins.name }}</span>-->
-        <!--</a>-->
-      <!--</mat-list-item>-->
-    <!--</mat-nav-list>-->
+    <mat-nav-list>
+      <mat-list-item *ngFor="let plugin of availablePlugins">
+        <a mat-list-item href="{{plugin.url}}" target='_blank'>
+          <img *ngIf="plugin.icon" class="dependency-icon" src="{{plugin.icon}}">
+          <mat-icon *ngIf="!plugin.icon" class="dependency-icon">extension</mat-icon>
+          <span class="subModuleType">{{ plugin.type }}</span>
+          <span class="subModuleAuthor" *ngIf="plugin.author">by {{ plugin.author }}</span>
+          <span class="subModuleCredits" *ngIf=" plugin.credits">credits {{ plugin.credits }}</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
   </div>
 </div>
 
@@ -45,13 +46,13 @@
   <h2>Widgets</h2>
   <div>
     <mat-nav-list>
-      <mat-list-item *ngFor="let widgets of yadomsWidgets">
-        <a mat-list-item href="{{widgets.url}}" target='_blank'>
-          <img *ngIf="widgets.icon" class="dependency-icon" src="{{widgets.icon}}">
-          <mat-icon *ngIf="!widgets.icon" class="dependency-icon">extension</mat-icon>
-          <span class="type">{{ widgets.type }}</span>
-          <span class="author" *ngIf="widgets.author">by {{ widgets.author }}</span>
-          <span class="credits" *ngIf=" widgets.credits">credits {{ widgets.credits }}</span>
+      <mat-list-item *ngFor="let widget of yadomsWidgets">
+        <a mat-list-item href="{{widget.url}}" target='_blank'>
+          <img *ngIf="widget.icon" class="dependency-icon" src="{{widget.icon}}">
+          <mat-icon *ngIf="!widget.icon" class="dependency-icon">extension</mat-icon>
+          <span class="subModuleType">{{ widget.type }}</span>
+          <span class="subModuleAuthor" *ngIf="widget.author">by {{ widget.author }}</span>
+          <span class="subModuleCredits" *ngIf=" widget.credits">credits {{ widget.credits }}</span>
         </a>
       </mat-list-item>
     </mat-nav-list>

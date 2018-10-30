@@ -12,17 +12,17 @@
   margin: 5px;
 }
 
-.widgets .type {
+.subModuleType {
 font-size: 1em;
   margin: 5px;
 }
 
-.widgets .author {
+.subModuleAuthor {
   font-size: 0.8em;
   margin: 5px;
 }
 
-.widgets .credits {
+.subModuleCredits {
   font-size: 0.6em;
   margin: 5px;
 }
