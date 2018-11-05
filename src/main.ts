@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { YdModule } from './yd/yd.module';
+import { YdModule } from './app/yd.module';
 import { environment } from './environments/environment';
 
 import 'hammerjs';
