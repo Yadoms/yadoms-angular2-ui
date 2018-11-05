@@ -22,6 +22,7 @@ import {YdDateAdapter} from '../yd.dates';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {WidgetComponent} from './widget/widget.component';
 import {AdministrationModule} from './administration/administration.module';
+import { PluginHostDirective } from './widget/plugin-host.directive';
 
 @NgModule({
   imports: [CommonModule, routing, TranslateModule, SharedModule, NgxPageScrollModule,
@@ -34,7 +35,7 @@ import {AdministrationModule} from './administration/administration.module';
     MatPseudoCheckboxModule, MatProgressSpinnerModule,
     FlexLayoutModule, AdministrationModule],
   exports: [],
-  declarations: [HomeComponent, PageComponent, WidgetComponent],
+  declarations: [HomeComponent, PageComponent, WidgetComponent, PluginHostDirective],
   providers: [
     {provide: DateAdapter, useValue: YdDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},

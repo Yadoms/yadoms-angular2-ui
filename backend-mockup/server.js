@@ -55,8 +55,8 @@ router.get('/page/:pageid', function (req, res) {
 router.get('/page/:pageid/widget', function (req, res) {
   fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
-    const result = _.filter(d.instances, ['idPage', req.params.pageid]);
-    res.json(generateSuccess(result));
+    d.widget = _.filter(d.widget, ['idPage', req.params.pageid]);
+    res.json(generateSuccess(d));
   });
 });
 
@@ -72,7 +72,7 @@ router.get('/widget/package', function (req, res) {
 router.get('/widget', function (req, res) {
   fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
-    res.json(generateSuccess(d.instances));
+    res.json(generateSuccess(d));
   });
 });
 

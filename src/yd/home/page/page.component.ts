@@ -30,7 +30,6 @@ export class PageComponent implements OnInit, AfterViewInit {
             itemSelector: '.widget',
             gutter: 10
         });
-
         this.initializeComponentFromRoute();
     }
 

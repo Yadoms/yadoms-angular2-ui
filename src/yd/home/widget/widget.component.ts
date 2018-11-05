@@ -24,7 +24,7 @@ export class WidgetComponent implements OnInit {
 
   ngOnInit() {
     // this.config = JSON.stringify(this.configuration.configuration);
-    this._wfs.load({ name: 'numeric-display', module: 'PluginModule', componentSelector: 'app-plugin-component' }, this.pluginHost.viewContainerRef)
+    this._wfs.load({ name: 'numeric-display', module: 'PluginModule', componentSelector: 'yd-plugin-component' }, this.pluginHost.viewContainerRef)
     .then((componentRef) => {
       componentRef.instance.data = this.configuration;
     });

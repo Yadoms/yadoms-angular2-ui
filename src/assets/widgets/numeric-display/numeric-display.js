@@ -11,7 +11,7 @@ var common_1 = require("@angular/common");
 var core_2 = require("@angular/core");
 var PluginComponent = /** @class */ (function () {
     function PluginComponent() {
-        this.data = "Hello!";
+        this.data = 'Hello!';
     }
     PluginComponent.prototype.ngOnInit = function () {
     };
