@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
@@ -14,7 +14,9 @@ import { Widget } from '../../core/models/widget';
     styleUrls: ['./page.component.scss']
 })
 
-export class PageComponent implements OnInit {
+export class PageComponent implements OnInit, AfterViewInit {
+    private _packery: Packery;
+
     @Input() public data: Page;
     public widgets: Widget[] = [];
 
@@ -23,14 +25,17 @@ export class PageComponent implements OnInit {
     }
 
     public ngOnInit() {
-
-        const pckry = new Packery( '.grid', {
+        this._packery = new Packery( '.grid', {
             // options
-            itemSelector: '.grid-item',
+            itemSelector: '.widget',
             gutter: 10
         });
 
         this.initializeComponentFromRoute();
+    }
+
+    public ngAfterViewInit() {
+        this._packery.reloadItems();
     }
 
     /**

@@ -1,0 +1,40 @@
+{
+  "instances": [
+  ],
+  "packages": [
+    {
+      "type": "dev-emptyPlugin",
+      "version": "1.0.0",
+      "author": "Your name here",
+      "url": "https://linkToUrlHere.com",
+      "credits": "external libraries used here",
+      "supportedPlatforms": "all"
+    },
+    {
+      "type": "dev-fakePlugin",
+      "version": "1.0.0",
+      "author": "Sébastien GALLOU",
+      "url": "https://github.com/Yadoms/yadoms/wiki/FakePlugin",
+      "credits": "",
+      "supportedPlatforms": "all",
+      "dependencies": {
+        "yadoms": {
+          "minimumVersion": "2.0.0"
+        }
+      }
+    },
+    {
+      "type": "enOcean",
+      "version": "1.1.2",
+      "author": "Sébastien Gallou",
+      "url": "https://github.com/Yadoms/yadoms/",
+      "credits": "",
+      "supportedPlatforms": "all",
+      "dependencies": {
+        "yadoms": {
+          "minimumVersion": "2.1.0-beta.2"
+        }
+      }
+    }
+  ]
+}

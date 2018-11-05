@@ -2,9 +2,11 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var _ = require('lodash');
+var bodyParser = require('body-parser');
 
 var router = express.Router();
 
+router.use(bodyParser.json());       // to support JSON-encoded bodies
 
 //add CORS
 router.use(function (req, res, next) {
@@ -66,6 +68,16 @@ router.get('/widget', function(req, res) {
     });
 });
 
+router.get('/plugin', function(req, res) {
+  console.log(req.body);
+  fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function(err,data) {
+    const d = JSON.parse(data);
+    const result = d.packages.map(plugin => {
+      return plugin.type;
+    });
+    res.json(generateSuccess(result));
+  });
+});
 
 
 app.use('/rest', router);
