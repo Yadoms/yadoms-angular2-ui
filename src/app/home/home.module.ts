@@ -18,7 +18,7 @@ import {
 
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {YdDateAdapter} from '../yd.dates';
+import {AppDateAdapter} from '../app.dates';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {WidgetComponent} from './widget/widget.component';
 import {AdministrationModule} from './administration/administration.module';
@@ -37,7 +37,7 @@ import { PluginHostDirective } from './widget/plugin-host.directive';
   exports: [],
   declarations: [HomeComponent, PageComponent, WidgetComponent, PluginHostDirective],
   providers: [
-    {provide: DateAdapter, useValue: YdDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
 })

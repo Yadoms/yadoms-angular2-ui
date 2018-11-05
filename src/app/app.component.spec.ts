@@ -3,8 +3,8 @@ import { inject, async, TestBed, ComponentFixture } from '@angular/core/testing'
 import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
 
 // Load the implementations that should be tested
-import { YdComponent } from './yd.component';
-import { AppState } from './yd.service';
+import { AppComponent } from './app.component';
+import { AppState } from './app.service';
 import { CoreModule } from './core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -18,13 +18,13 @@ export function createTranslateLoader(http: HttpClient) {
 
 TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),
 describe(`AppComponent`, () => {
-  let comp: YdComponent;
-  let fixture: ComponentFixture<YdComponent>;
+  let comp: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
   // async beforeEach
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ YdComponent ],
+      declarations: [ AppComponent ],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         HttpClientModule,
@@ -40,7 +40,7 @@ describe(`AppComponent`, () => {
 
   // synchronous beforeEach
   beforeEach(() => {
-    fixture = TestBed.createComponent(YdComponent);
+    fixture = TestBed.createComponent(AppComponent);
     comp    = fixture.componentInstance;
 
     fixture.detectChanges(); // trigger initial data binding

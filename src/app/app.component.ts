@@ -1,6 +1,6 @@
 import { DateAdapter } from '@angular/material/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AppState } from './yd.service';
+import { AppState } from './app.service';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import fontawesome from 'font-awesome-webpack2';
@@ -12,10 +12,10 @@ import fontawesome from 'font-awesome-webpack2';
 @Component({
   selector: 'yd-root',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./yd.component.css'],
-  templateUrl: './yd.component.html'
+  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html'
 })
-export class YdComponent implements OnInit {
+export class AppComponent implements OnInit {
   /**
    * Path to Yadoms logo
    */

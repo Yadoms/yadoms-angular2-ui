@@ -1,2 +1,2 @@
 // App
-export * from './yd.module';
+export * from './app.module';

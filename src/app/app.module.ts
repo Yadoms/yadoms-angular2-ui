@@ -15,16 +15,16 @@ import { MatButtonModule, MatCheckboxModule, MatSnackBarModule, MatAutocompleteM
          MatPseudoCheckboxModule, MatProgressSpinnerModule } from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import { YdDateAdapter } from './yd.dates';
+import { AppDateAdapter } from './app.dates';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ROUTES } from './yd.routes';
+import { ROUTES } from './app.routes';
 // App is our top level component
-import { YdComponent } from './yd.component';
-import { AppState } from './yd.service';
+import { AppComponent } from './app.component';
+import { AppState } from './app.service';
 import { NoContentComponent } from './no-content';
 import { CheckServerComponent } from './check/check-server.component';
 import { CoreModule } from './core';
@@ -34,7 +34,7 @@ import { CookieModule } from 'ngx-cookie';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import { CustomReuseStrategy } from './yd.reuse.strategy';
+import { CustomReuseStrategy } from './app.reuse.strategy';
 
 /**
  * Load the runtime confiuguration
@@ -56,9 +56,9 @@ export function createTranslateLoader(http: HttpClient) {
  * `YdModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [YdComponent],
+  bootstrap: [AppComponent],
   declarations: [
-    YdComponent,
+    AppComponent,
     NoContentComponent,
     CheckServerComponent
   ],
@@ -97,9 +97,9 @@ export function createTranslateLoader(http: HttpClient) {
     RuntimeConfigurationService,
     { provide: APP_INITIALIZER, useFactory: loadRuntimeConfiguration, deps: [RuntimeConfigurationService], multi: true },
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
-    { provide: DateAdapter, useValue: YdDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
   ]
 })
-export class YdModule {
+export class AppModule {
 }
