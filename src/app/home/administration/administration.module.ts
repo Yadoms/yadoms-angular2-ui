@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import { administrationRoutes } from './administration.route';
 import {CommonModule} from '@angular/common';
 import {MatIconModule, MatDividerModule, MatListModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,9 +16,7 @@ import {MaintenanceComponent} from './maintenance/maintenance.component';
 import {AboutComponent} from './about/about.component';
 
 @NgModule({
-  imports: [
-    CommonModule, MatListModule, MatIconModule, HttpClientModule, MatDividerModule
-  ],
+  imports: [ CommonModule, administrationRoutes, MatListModule, MatIconModule, HttpClientModule, MatDividerModule ],
   declarations: [AdminPageHeaderComponent, SystemComponent, PluginsComponent, DevicesComponent,
     AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent]
 })

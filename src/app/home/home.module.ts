@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {routing} from './home.routing';
 import {HomeComponent} from './home.component';
-import {CoreModule} from '../core';
 import {SharedModule} from '../shared';
 import {PageComponent} from './page/page.component';
 import {TranslateModule} from '@ngx-translate/core';
