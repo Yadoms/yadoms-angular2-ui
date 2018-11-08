@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-plugin-component',
+  selector: 'yd-plugin-component',
   template: `
     <p>
       lazy works! {{data}}
@@ -11,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class PluginComponent implements OnInit {
-  type: "PluginComponent";
-  data: string = "Hello!";
+  type: 'PluginComponent';
+  data = 'Hello!';
 
   ngOnInit() {
   }

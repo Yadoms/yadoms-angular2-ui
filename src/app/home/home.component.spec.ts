@@ -17,6 +17,18 @@ import { MockBackend } from '@angular/http/testing';
 import { AppState } from '../app.service';
 import { HomeComponent } from './home.component';
 import {Title} from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+/**
+ * Export this function to allow TranslateModule initilizing in AOT mode
+ */
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+
 
 describe(`Home`, () => {
   let comp: HomeComponent;
@@ -27,6 +39,9 @@ describe(`Home`, () => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }})
+      ],
       providers: [
         BaseRequestOptions,
         MockBackend,

@@ -53,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 /**
- * `AppModule` is the main entry point into Angular2's bootstraping process
+ * `YdModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
   bootstrap: [AppComponent],
@@ -66,7 +66,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules, enableTracing: false }),
     TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),

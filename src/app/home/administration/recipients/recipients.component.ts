@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-recipients',
+  selector: 'yd-recipients',
   templateUrl: './recipients.component.html',
   styleUrls: ['./recipients.component.css']
 })

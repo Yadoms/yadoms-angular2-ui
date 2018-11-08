@@ -4,7 +4,7 @@ import { RestServerService } from '../core/restserver.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-check-server',
+  selector: 'yd-check-server',
   templateUrl: './check-server.component.html',
   styleUrls: ['./check-server.component.css']
 })

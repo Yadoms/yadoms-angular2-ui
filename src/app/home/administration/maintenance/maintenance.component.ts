@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-maintenance',
+  selector: 'yd-maintenance',
   templateUrl: './maintenance.component.html',
   styleUrls: ['./maintenance.component.css']
 })

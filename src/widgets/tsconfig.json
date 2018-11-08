@@ -2,7 +2,7 @@
     "compilerOptions": {
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "lib": ["es2016","dom"],      
+      "lib": ["es2017","dom"],      
       "outDir": "../assets/widgets",
       "types": [],
       "rootDir": "./"

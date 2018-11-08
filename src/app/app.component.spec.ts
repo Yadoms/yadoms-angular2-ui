@@ -3,10 +3,8 @@ import { inject, async, TestBed, ComponentFixture } from '@angular/core/testing'
 import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
 
 // Load the implementations that should be tested
-import * as moment from 'moment';
 import { AppComponent } from './app.component';
 import { AppState } from './app.service';
-import { SdBs2Service } from './core/sdbs2/sdbs2.service';
 import { CoreModule } from './core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -53,8 +51,8 @@ describe(`AppComponent`, () => {
     expect(comp).toBeDefined();
   });
 
-  it(`should be NSE`, () => {
-    expect(comp.nseLogo).toEqual('assets/img/nse.png');
+  it(`should be the Yadoms logo`, () => {
+    expect(comp.yadomsLogo).toEqual('assets/img/logo.png');
     expect(comp.name).toEqual('GSS Mobile');
   });
 

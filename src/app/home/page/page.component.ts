@@ -1,35 +1,40 @@
-import { Component, OnInit, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Page } from '../../core/models/page';
 import { PageService } from '../../core/pages.service';
 import * as Packery from 'packery-rows';
-import { WidgetService } from '../../core/widgets.service';
+import { WidgetService } from '../../core/widget.service';
 import { Widgets } from '../../core/models/widgets';
 import { switchMap } from 'rxjs/operators';
 import { Widget } from '../../core/models/widget';
 
 @Component({
-    selector: 'app-page',
+    selector: 'yd-page',
     templateUrl: 'page.component.html',
     styleUrls: ['./page.component.scss']
 })
 
-export class PageComponent implements OnInit {
+export class PageComponent implements OnInit, AfterViewInit {
+    private _packery: Packery;
+
     @Input() public data: Page;
+    public widgets: Widget[] = [];
 
     constructor(private route: ActivatedRoute, private router: Router, private pageService: PageService,
         private componentFactoryResolver: ComponentFactoryResolver, private widgetService: WidgetService) {
     }
 
     public ngOnInit() {
-
-        const pckry = new Packery( '.grid', {
+        this._packery = new Packery( '.grid', {
             // options
-            itemSelector: '.grid-item',
+            itemSelector: '.widget',
             gutter: 10
         });
-
         this.initializeComponentFromRoute();
+    }
+
+    public ngAfterViewInit() {
+        this._packery.reloadItems();
     }
 
     /**
@@ -54,10 +59,8 @@ export class PageComponent implements OnInit {
             });
     }
 
-    public widgets: Widget[] = [];
-    
     private initializeWidgets() {
-        if(this.data && this.data.id) {
+        if (this.data && this.data.id) {
             this.widgetService.getForPage(this.data.id)
             .then( (widgets: Widgets) => {
                 this.widgets = widgets.widget;

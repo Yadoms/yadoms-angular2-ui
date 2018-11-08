@@ -8,7 +8,7 @@ import { Pages } from '../core/models/pages';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-home',
+  selector: 'yd-home',
   providers: [],
   styleUrls: [ './home.component.css' ],
   templateUrl: './home.component.html'

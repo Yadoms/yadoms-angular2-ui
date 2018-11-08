@@ -10,26 +10,27 @@ import fontawesome from 'font-awesome-webpack2';
  * Top Level Component
  */
 @Component({
-  selector: 'app-root',
+  selector: 'yd-root',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   /**
-   * Path to nse logo
+   * Path to Yadoms logo
    */
-  public nseLogo = 'assets/img/nse.png';
+  public yadomsLogo = 'assets/img/logo.png';
 
   /**
    * Application name
    */
-  public name = 'GSS Mobile';
+  public name = 'Yadoms web client';
 
   /**
    * Constructor
    * @param appState The appState
    * @param translate The translate service
+   * @param dateAdapter
    */
   constructor(public appState: AppState, translate: TranslateService, private dateAdapter: DateAdapter<any>) {
     try {

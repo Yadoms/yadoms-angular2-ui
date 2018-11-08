@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-plugins',
+  selector: 'yd-plugins',
   templateUrl: './plugins.component.html',
   styleUrls: ['./plugins.component.css']
 })

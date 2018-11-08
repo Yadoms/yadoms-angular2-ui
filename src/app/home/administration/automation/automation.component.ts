@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-automation',
+  selector: 'yd-automation',
   templateUrl: './automation.component.html',
   styleUrls: ['./automation.component.css']
 })

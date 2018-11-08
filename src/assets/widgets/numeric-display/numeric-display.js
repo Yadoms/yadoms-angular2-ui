@@ -11,13 +11,13 @@ var common_1 = require("@angular/common");
 var core_2 = require("@angular/core");
 var PluginComponent = /** @class */ (function () {
     function PluginComponent() {
-        this.data = "Hello!";
+        this.data = 'Hello!';
     }
     PluginComponent.prototype.ngOnInit = function () {
     };
     PluginComponent = __decorate([
         core_2.Component({
-            selector: 'app-plugin-component',
+            selector: 'yd-plugin-component',
             template: "\n    <p>\n      lazy works! {{data}}\n    </p>\n  "
         })
     ], PluginComponent);
