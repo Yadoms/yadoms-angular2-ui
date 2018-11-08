@@ -22,7 +22,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 /**
- * Export this function to allow TranslateModule initilizing in AOT mode
+ * Export this function to allow TranslateModule initializing in AOT mode
  */
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

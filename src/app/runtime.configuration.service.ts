@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { share } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,6 +22,8 @@ export class RuntimeConfigurationService {
     /**
      * The local configuration file
      */
+      //TODO utile ? C'est la même URL que le serveur qui fournit les pages. Et en debug, on utilise un proxy qui redirige les requêtes REST
+      // vers le port 8080 (voir fichier proxy.conf.json)
     private configFileName = 'yadomsconfig.json';
 
     /**

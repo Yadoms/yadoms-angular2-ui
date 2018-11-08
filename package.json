@@ -28,7 +28,7 @@
   "scripts": {
     "backend": "supervisor -w backend-mockup -e node,js,json backend-mockup/server.js",
     "ng": "ng",
-    "start": "npm run widgets && ng serve",
+    "start": "npm run widgets && ng serve --proxy-config proxy.conf.json",
     "build": "npm run widgets && ng build",
     "test": "ng test",
     "lint": "ng lint",
