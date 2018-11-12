@@ -6,6 +6,5 @@ export enum PluginCategory {
 export class AvailablePlugin {
   public type: string;
   public author: string;
-  public credits: string;
-  // TODO compléter
+  public url: string;
 }
