@@ -26,7 +26,7 @@
   "homepage": "https://github.com/Yadoms/yadoms-angular2-ui",
   "license": "LGPL-3.0",
   "scripts": {
-    "backend": "supervisor -w backend-mockup -e node,js,json backend-mockup/server.js",
+    "backend": "node-dev %NODE_DEBUG_OPTION% backend-mockup/server.js",
     "ng": "ng",
     "start": "npm run widgets && ng serve --proxy-config proxy.conf.json",
     "build": "npm run widgets && ng build",
