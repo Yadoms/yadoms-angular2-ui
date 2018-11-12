@@ -12,7 +12,6 @@ import {RuntimeConfigurationService, RuntimeConfiguration} from '../runtime.conf
 @Injectable()
 export class RestServerService {
   constructor(private http: HttpClient, private router: Router, private location: Location, private errorService: ErrorService, private runtimeConfiguration: RuntimeConfigurationService) {
-    console.log('Yadoms Rest server location : ' + this.getServerAbsolutePath_());
   }
 
   /**
@@ -122,7 +121,7 @@ export class RestServerService {
         return;
       }
 
-      const fullUrlToUse = RestServerService.concatenateUrl_(RestServerService.concatenateUrl_(this.getServerAbsolutePath_(), 'rest'), url);
+      const fullUrlToUse = RestServerService.concatenateUrl_('rest', url);
 
       const requestOptions: any = options || {};
       if (data) {
@@ -141,14 +140,5 @@ export class RestServerService {
           }
         }, reject);
     });
-  }
-
-  /**
-   * Get the asbolute server path (not url)
-   * @return {string} The  asbolute server path
-   * @private Should not be called outside server-rest.js
-   */
-  private getServerAbsolutePath_(): string {
-    return this.runtimeConfiguration.get().yadomsServer.restUrl;
   }
 }

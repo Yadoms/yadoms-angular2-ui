@@ -7,10 +7,10 @@ import { HttpClient } from '@angular/common/http';
  */
 export interface RuntimeConfiguration {
     /**
-     * The yadoms server url
+     * The yadoms server configuration
      */
+    // TODO utile ?
     yadomsServer: {
-        restUrl: string;
     };
 }
 
@@ -22,8 +22,6 @@ export class RuntimeConfigurationService {
     /**
      * The local configuration file
      */
-      //TODO utile ? C'est la même URL que le serveur qui fournit les pages. Et en debug, on utilise un proxy qui redirige les requêtes REST
-      // vers le port 8080 (voir fichier proxy.conf.json)
     private configFileName = 'yadomsconfig.json';
 
     /**
@@ -31,7 +29,6 @@ export class RuntimeConfigurationService {
      */
     private defaultConfiguration: RuntimeConfiguration = {
         yadomsServer : {
-            restUrl : 'http://127.0.0.1:8080'
         }
     };
 
@@ -60,7 +57,6 @@ export class RuntimeConfigurationService {
                     .subscribe( (readCfg: RuntimeConfiguration) => {
                         try {
                             this.currentConfiguration = readCfg;
-                            console.log(readCfg);
                             resolve(this.currentConfiguration);
                         } catch (error) {
                             console.error('Fail to parse yadomsconfig.json : ' + error, error);

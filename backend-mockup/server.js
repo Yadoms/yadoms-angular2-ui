@@ -99,7 +99,7 @@ router.put('/plugin', function (req, res) {
 
 yd.use('/rest', router);
 
-var server = yd.listen(8088, function () {
+var server = yd.listen(8080, function () {
   var host = server.address().address;
   var port = server.address().port;
 
