@@ -44,18 +44,18 @@ export class AboutComponent implements OnInit {
     //TODO compléter la liste avec les libs JS/TS utilisées
   ];
 
-  public yadomsWidgets: WidgetPackages;
+  public availableWidgets: WidgetPackages;
   public availablePlugins: AvailablePlugin[];
 
   constructor(private widgetService: WidgetService, private pluginService: PluginService) {
     this.widgetService.getAllPackages()
       .then((packages: WidgetPackages) => {
-        this.yadomsWidgets = packages;
+        this.availableWidgets = packages;
       });
-    this.pluginService.getAvailablePluginsPackage(['type', 'author', 'credits'])
+    this.pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
       .then((plugins: string[]) => { //TODO voir si on peut retourner un object plutôt qu'un string[][]
-        this.availablePlugins = plugins.map((plugin) => {
-          return {author: plugin['author'], type: plugin['type'], credits: plugin['credits']};
+        this.availablePlugins = plugins.plugins.map((plugin) => {
+          return {type: plugin['type'], author: plugin['author'], url: plugin['url']};
         });
       });
   }

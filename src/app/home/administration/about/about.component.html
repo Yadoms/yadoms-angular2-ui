@@ -30,12 +30,10 @@
   <div>
     <mat-nav-list>
       <mat-list-item *ngFor="let plugin of availablePlugins">
-        <a mat-list-item href="{{plugin.url}}" target='_blank'>
-          <img *ngIf="plugin.icon" class="dependency-icon" src="{{plugin.icon}}">
-          <mat-icon *ngIf="!plugin.icon" class="dependency-icon">extension</mat-icon>
+        <a mat-list-item [attr.href]="plugin.url ? plugin.url : null" target='_blank'>
+          <mat-icon class="dependency-icon">extension</mat-icon>
           <span class="subModuleType">{{ plugin.type }}</span>
           <span class="subModuleAuthor" *ngIf="plugin.author">by {{ plugin.author }}</span>
-          <span class="subModuleCredits" *ngIf=" plugin.credits">credits {{ plugin.credits }}</span>
         </a>
       </mat-list-item>
     </mat-nav-list>
@@ -46,7 +44,7 @@
   <h2>Widgets</h2>
   <div>
     <mat-nav-list>
-      <mat-list-item *ngFor="let widget of yadomsWidgets">
+      <mat-list-item *ngFor="let widget of availableWidgets">
         <a mat-list-item href="{{widget.url}}" target='_blank'>
           <img *ngIf="widget.icon" class="dependency-icon" src="{{widget.icon}}">
           <mat-icon *ngIf="!widget.icon" class="dependency-icon">extension</mat-icon>
