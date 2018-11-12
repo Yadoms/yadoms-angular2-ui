@@ -7,13 +7,6 @@ const router = express.Router({});
 const bodyParser = require('body-parser');
 
 
-//add CORS
-router.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 router.use(bodyParser.json());
 
 
@@ -81,9 +74,10 @@ router.get('/widget', function (req, res) {
 router.put('/plugin', function (req, res) {
   fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
-    const result = d.packages.map(plugin => {
+    const result = {};
+    result.plugins = d.plugins.map(plugin => {
       if (!req.body || !req.body.fields)
-        return plugin;
+        return d.plugins;
 
       // Filter by field
       const pluginResult = {};
