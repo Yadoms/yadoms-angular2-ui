@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../core/widget.service';
 import {PluginService} from '../../../core/plugin.service';
 import {WidgetPackages} from '../../../core/models/widget.packages';
-import {AvailablePlugin, AvailablePlugins} from '../../../core/models/available-plugin';
+import {AvailablePlugin} from '../../../core/models/available-plugin';
 
 // TODO appliquer l'i18n
 
@@ -49,11 +49,11 @@ export class AboutComponent implements OnInit {
 
   constructor(private widgetService: WidgetService, private pluginService: PluginService) {
     this.widgetService.getAllPackages()
-      .then((packages: WidgetPackages) => {
+      .then(packages => {
         this.availableWidgets = packages;
       });
     this.pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
-      .then((plugins: AvailablePlugins) => {
+      .then(plugins => {
         this.availablePlugins = plugins.plugins.map((plugin) => {
           return {type: plugin['type'], author: plugin['author'], url: plugin['url']};
         });

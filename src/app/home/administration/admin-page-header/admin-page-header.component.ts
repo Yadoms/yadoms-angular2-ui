@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {SystemService} from '../../../core/system.service';
 
 @Component({
   selector: 'yd-admin-page-header',
@@ -8,8 +9,13 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AdminPageHeaderComponent implements OnInit {
 
   @Input() title: string;
+  protected developerMode: boolean;
 
-  constructor() {
+  constructor(private systemService: SystemService) {
+    this.systemService.getInformation()
+      .then(systemInformation => {
+        this.developerMode = systemInformation.developerMode;
+      });
   }
 
   ngOnInit() {

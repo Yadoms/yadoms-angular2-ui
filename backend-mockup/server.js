@@ -27,6 +27,20 @@ function generateError(message, data) {
   };
 }
 
+router.get('/system/information', function (req, res) {
+  const result = {
+    runningPlatform: 'Unknown platform (backend-mockup)',
+    yadoms: {
+      version: '1.2.3'
+    },
+    startupTime: '2018-11-13T23:03:14+00:00',
+    executablePath: 'executable (backend-mockup)',
+    serverReady: true,
+    developerMode: true,
+  };
+  res.json(generateSuccess(result));
+});
+
 router.get('/page', function (req, res) {
   fs.readFile(__dirname + '/data/pages.json', 'utf-8', function (err, data) {
     res.json(generateSuccess(JSON.parse(data)));
