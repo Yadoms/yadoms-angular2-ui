@@ -58,7 +58,7 @@ router.get('/page/:pageid/widget', function (req, res) {
 router.get('/widget/package', function (req, res) {
   fs.readFile(__dirname + '/data/widgets.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
-    res.json(generateSuccess(d.packages));
+    res.json(generateSuccess(d.package));
   });
 });
 
