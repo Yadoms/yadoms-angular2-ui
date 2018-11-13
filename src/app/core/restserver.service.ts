@@ -1,17 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Http, Response, Headers, RequestOptionsArgs, RequestOptions} from '@angular/http';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {RestResult} from './rest-result';
-import {ErrorService, ErrorCodes, ErrorInfo} from './error.service';
-import {Utilities} from '../shared/utilities';
+import {ErrorService} from './error.service';
 import {Location} from '@angular/common';
-import * as CryptoJS from 'crypto-js';
-import {RuntimeConfigurationService, RuntimeConfiguration} from '../runtime.configuration.service';
 
 @Injectable()
 export class RestServerService {
-  constructor(private http: HttpClient, private router: Router, private location: Location, private errorService: ErrorService, private runtimeConfiguration: RuntimeConfigurationService) {
+  constructor(private http: HttpClient, private router: Router, private location: Location, private errorService: ErrorService) {
   }
 
   /**

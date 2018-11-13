@@ -8,3 +8,7 @@ export class AvailablePlugin {
   public author: string;
   public url: string;
 }
+
+export class AvailablePlugins {
+  public plugins: string[];
+}

@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../core/widget.service';
 import {PluginService} from '../../../core/plugin.service';
 import {WidgetPackages} from '../../../core/models/widget.packages';
-import {AvailablePlugin} from '../../../core/models/available-plugin';
+import {AvailablePlugin, AvailablePlugins} from '../../../core/models/available-plugin';
 
-//TODO appliquer l'i18n
+// TODO appliquer l'i18n
 
 @Component({
   selector: 'yd-about',
@@ -41,7 +41,7 @@ export class AboutComponent implements OnInit {
       url: 'http://www.swig.org/',
       icon: 'assets/img/about/swig-logo.png'
     },
-    //TODO compléter la liste avec les libs JS/TS utilisées
+    // TODO compléter la liste avec les libs JS/TS utilisées
   ];
 
   public availableWidgets: WidgetPackages;
@@ -53,7 +53,7 @@ export class AboutComponent implements OnInit {
         this.availableWidgets = packages;
       });
     this.pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
-      .then((plugins: string[]) => { //TODO voir si on peut retourner un object plutôt qu'un string[][]
+      .then((plugins: AvailablePlugins) => {
         this.availablePlugins = plugins.plugins.map((plugin) => {
           return {type: plugin['type'], author: plugin['author'], url: plugin['url']};
         });

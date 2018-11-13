@@ -93,9 +93,9 @@ router.put('/plugin', function (req, res) {
 
 yd.use('/rest', router);
 
-var server = yd.listen(8080, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+const server = yd.listen(8080, function () {
+  const host = server.address().address === "::" ? "localhost" : server.address().address;
+  const port = server.address().port;
 
   console.log("Yadoms Mockup Server started : http://%s:%s", host, port);
 });

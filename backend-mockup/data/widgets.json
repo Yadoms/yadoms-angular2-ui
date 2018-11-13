@@ -23,7 +23,7 @@
       "sizeX": "700",
       "sizeY": "300",
       "position": "0",
-      "title": "",
+      "title": "noTitle",
       "configuration": {
         "interval": "DAY",
         "legends": {
@@ -105,7 +105,7 @@
       "sizeX": "100",
       "sizeY": "100",
       "position": "1",
-      "title": "",
+      "title": "noTitle",
       "configuration": ""
     }
   ],
