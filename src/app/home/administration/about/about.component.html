@@ -29,7 +29,7 @@
   <h2>Plugins</h2>
   <div>
     <mat-nav-list>
-      <mat-list-item *ngFor="let plugin of availablePlugins">
+      <mat-list-item *ngFor="let plugin of availablePlugins.plugins">
         <a mat-list-item [attr.href]="plugin.url ? plugin.url : null" target='_blank'>
           <mat-icon class="dependency-icon">extension</mat-icon>
           <span class="subModuleType">{{ plugin.type }}</span>

@@ -1,5 +1,34 @@
 {
   "instances": [
+    {
+      "Id": 1,
+      "DisplayName": "System",
+      "Type": "System",
+      "Configuration": null,
+      "AutoStart": true,
+      "Category": "System"
+    },
+    {
+      "Id": 2,
+      "DisplayName": "My fakePlugin instance",
+      "Type": "dev-fakePlugin",
+      "Configuration": {
+        "StringParameter": "",
+        "BoolParameter": "false",
+        "IntParameter": "258",
+        "DecimalParameter": "25.3",
+        "EnumParameter": "EnumValue2",
+        "MySection": {
+          "content": {
+            "SubIntParameter": "65535",
+            "SubStringParameter": ""
+          }
+        },
+        "ConditionalParameter": ""
+      },
+      "AutoStart": true,
+      "Category": "User"
+    }
   ],
   "plugins": [
     {

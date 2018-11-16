@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../core/widget.service';
 import {PluginService} from '../../../core/plugin.service';
 import {WidgetPackages} from '../../../core/models/widget.packages';
-import {AvailablePlugin} from '../../../core/models/available-plugin';
+import {AvailablePlugins} from '../../../core/models/available-plugin';
 
 // TODO appliquer l'i18n
 
@@ -44,8 +44,8 @@ export class AboutComponent implements OnInit {
     // TODO compléter la liste avec les libs JS/TS utilisées
   ];
 
-  public availableWidgets: WidgetPackages;
-  public availablePlugins: AvailablePlugin[];
+  availableWidgets: WidgetPackages;
+  availablePlugins: AvailablePlugins = new AvailablePlugins();
 
   constructor(private widgetService: WidgetService, private pluginService: PluginService) {
     this.widgetService.getAllPackages()
@@ -54,7 +54,7 @@ export class AboutComponent implements OnInit {
       });
     this.pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
       .then(plugins => {
-        this.availablePlugins = plugins.plugins.map((plugin) => {
+        this.availablePlugins.plugins = plugins.plugins.map((plugin) => {
           return {type: plugin['type'], author: plugin['author'], url: plugin['url']};
         });
       });

@@ -10,5 +10,5 @@ export class AvailablePlugin {
 }
 
 export class AvailablePlugins {
-  public plugins: string[];
+  public plugins: AvailablePlugin[];
 }

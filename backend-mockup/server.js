@@ -105,6 +105,14 @@ router.put('/plugin', function (req, res) {
 });
 
 
+router.get('/plugin/instance', function (req, res) {
+  fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function (err, data) {
+    const d = JSON.parse(data);
+    res.json(generateSuccess(d.instances));
+  });
+});
+
+
 yd.use('/rest', router);
 
 const server = yd.listen(8080, function () {
