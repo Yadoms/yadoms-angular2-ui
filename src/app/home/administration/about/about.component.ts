@@ -48,11 +48,11 @@ export class AboutComponent implements OnInit {
   availablePlugins: AvailablePlugins = new AvailablePlugins();
 
   constructor(private widgetService: WidgetService, private pluginService: PluginService) {
-    this.widgetService.getAllPackages()
+    widgetService.getAllPackages()
       .then(packages => {
         this.availableWidgets = packages;
       });
-    this.pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
+    pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
       .then(plugins => {
         this.availablePlugins.plugins = plugins.plugins.map((plugin) => {
           return {type: plugin['type'], author: plugin['author'], url: plugin['url']};

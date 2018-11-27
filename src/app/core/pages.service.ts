@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { RestResult } from './rest-result';
 import { RestServerService } from './restserver.service';
 import { Pages } from './models/pages';
 import { Page } from './models/page';

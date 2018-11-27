@@ -1,11 +1,36 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import {AboutComponent} from './about.component';
+import {PluginService} from '../../../core/plugin.service';
+import {WidgetService} from '../../../core/widget.service';
+import {WidgetPackages} from '../../../core/models/widget.packages';
+import {AvailablePlugins} from '../../../core/models/available-plugin';
 
 @Component({selector: 'yd-admin-page-header', template: ''})
 class YdAdminPageMockComponent {
+}
+
+class MockWidgetService extends WidgetService {
+  constructor() {
+    super(null);
+  }
+  public getAllPackages(): Promise<WidgetPackages> {
+    return new Promise<WidgetPackages>(() => {
+    });
+  }
+}
+
+class MockPluginService extends PluginService {
+  constructor() {
+    super(null);
+  }
+
+  public getAvailablePluginsPackage(fields: string[]): Promise<AvailablePlugins> {
+    return new Promise<AvailablePlugins>(() => {
+    });
+  }
 }
 
 describe('AboutComponent', () => {
@@ -15,7 +40,11 @@ describe('AboutComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AboutComponent, YdAdminPageMockComponent],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        {provide: WidgetService, useClass: MockWidgetService},
+        {provide: PluginService, useClass: MockPluginService}
+      ]
     })
       .compileComponents();
   }));

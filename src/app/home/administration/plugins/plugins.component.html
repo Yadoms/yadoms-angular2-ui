@@ -1,7 +1,5 @@
 <yd-admin-page-header title="Plugins"></yd-admin-page-header>
 <input [(ngModel)]="searchText" placeholder="recherche..."/>
 <ul>
-  <li *ngFor="let instance of (availablePluginInstances | pluginInstancesFilter : searchText)">
-    {{instance.DisplayName}}
-  </li>
+  <li *ngFor="let instance of (availablePluginInstances.plugins | pluginInstancesFilter : searchText)">{{instance.DisplayName}}</li>
 </ul>

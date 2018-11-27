@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PluginInstance} from '../../../core/models/pluginInstances';
+import {PluginInstance} from '../core/models/pluginInstances';
 
 @Pipe({
   name: 'pluginInstancesFilter'

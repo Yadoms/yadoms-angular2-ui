@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RestServerService} from './restserver.service';
 import {AvailablePlugins} from './models/available-plugin';
-import {PluginInstances} from './models/pluginInstances';
+import {PluginInstance, PluginInstances} from './models/pluginInstances';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,13 @@ export class PluginService {
   }
 
   public getAllPluginsInstance(): Promise<PluginInstances> {
-    return this.restServerService.get<PluginInstances>('plugin/instance');
+    return new Promise<PluginInstances>((resolve) => {
+      this.restServerService.get<PluginInstance[]>('plugin/instance')
+        .then((data) => {
+          const pi = new PluginInstances();
+          pi.plugins = data;
+          resolve(pi);
+        });
+    });
   }
 }

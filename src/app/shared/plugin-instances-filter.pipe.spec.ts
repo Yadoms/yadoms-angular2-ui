@@ -1,6 +1,6 @@
 import {PluginInstancesFilterPipe} from './plugin-instances-filter.pipe';
-import {PluginInstance, PluginInstances} from '../../../core/models/pluginInstances';
-import {PluginCategory} from '../../../core/models/available-plugin';
+import {PluginInstance, PluginInstances} from '../core/models/pluginInstances';
+import {PluginCategory} from '../core/models/available-plugin';
 
 describe('PluginInstancesFilterPipe', () => {
   it('create an instance', () => {

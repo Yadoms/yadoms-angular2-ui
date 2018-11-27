@@ -11,17 +11,16 @@ import {PluginInstances} from '../../../core/models/pluginInstances';
 
 export class PluginsComponent implements OnInit {
 
-  public availablePluginInstances: PluginInstances;
+  public availablePluginInstances: PluginInstances = new PluginInstances();
   searchText: string;
 
   constructor(private pluginService: PluginService) {
-    this.pluginService.getAllPluginsInstance()
+    pluginService.getAllPluginsInstance()
       .then(pluginInstances => {
         this.availablePluginInstances = pluginInstances;
-        });
+      });
   }
 
   ngOnInit() {
   }
-
 }
