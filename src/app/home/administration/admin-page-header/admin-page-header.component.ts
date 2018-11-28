@@ -12,7 +12,7 @@ export class AdminPageHeaderComponent implements OnInit {
   protected developerMode: boolean;
 
   constructor(private systemService: SystemService) {
-    this.systemService.getInformation()
+    systemService.getInformation()
       .then(systemInformation => {
         this.developerMode = systemInformation.developerMode;
       });
