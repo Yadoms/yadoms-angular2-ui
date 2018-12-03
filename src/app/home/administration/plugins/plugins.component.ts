@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
-import {PluginInstances} from '../../../core/models/pluginInstances';
+import {PluginInstance} from '../../../core/models/pluginInstances';
+import {MatTableDataSource} from '@angular/material';
 
 
 @Component({
@@ -11,16 +12,33 @@ import {PluginInstances} from '../../../core/models/pluginInstances';
 
 export class PluginsComponent implements OnInit {
 
-  public availablePluginInstances: PluginInstances = new PluginInstances();
-  searchText: string;
+  availablePluginInstances: MatTableDataSource<PluginInstance>;
+  displayedColumns = [];
+  columnNames = [{
+    id: 'DisplayName',
+    value: 'Plugin'
+  },
+    {
+      id: 'Type',
+      value: 'Type de plugin'
+    },
+    {
+      id: 'AutoStart',
+      value: 'Démarrage automatique'
+    }];
 
   constructor(private pluginService: PluginService) {
     pluginService.getAllPluginsInstance()
       .then(pluginInstances => {
-        this.availablePluginInstances = pluginInstances;
+        this.availablePluginInstances = new MatTableDataSource(pluginInstances.plugins);
       });
   }
 
   ngOnInit() {
+    this.displayedColumns = this.columnNames.map(x => x.id);
+  }
+
+  applyFilter(filterValue: string) {
+    this.availablePluginInstances.filter = filterValue.trim().toLowerCase();
   }
 }
