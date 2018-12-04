@@ -21,6 +21,11 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RestServerService } from '../core/restserver.service';
+import { PageService } from '../core/pages.service';
+import { HttpClientModule } from '@angular/common/http'; 
+import { Page } from '../core/models/page';
+import { Pages } from '../core/models/pages';
 
 /**
  * Export this function to allow TranslateModule initializing in AOT mode
@@ -29,7 +34,19 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+class RestServerServiceMockup
+{
+  
+}
 
+class PageServiceMockup
+{
+  getAll(): Promise<Pages> {
+    return new Promise<Pages>( (resolve, reject) => {
+      resolve(new Pages());
+    });
+  }
+}
 
 describe(`Home`, () => {
   let comp: HomeComponent;
@@ -42,7 +59,8 @@ describe(`Home`, () => {
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       providers: [
         BaseRequestOptions,
@@ -56,6 +74,14 @@ describe(`Home`, () => {
         },
         AppState,
         Title,
+        {
+          provide: RestServerService,
+          useClass: RestServerServiceMockup
+        },
+        {
+          provide: PageService,
+          useClass: PageServiceMockup
+        }
       ]
     })
     .compileComponents(); // compile template and css

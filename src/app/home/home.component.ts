@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../app.service';
 import { RestServerService } from '../core/restserver.service';
-import { NavigatorService } from '../core/navigator.service';
 import { PageService } from '../core/pages.service';
 import { Pages } from '../core/models/pages';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -20,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
 
   constructor(public appState: AppState, private router: Router, private restServerService: RestServerService,
-    public navigatorService: NavigatorService, private pageService: PageService,
+    private pageService: PageService,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

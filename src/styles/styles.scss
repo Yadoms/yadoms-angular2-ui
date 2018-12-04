@@ -11,9 +11,7 @@
 /* ========================================================================
    ======= Import material-design-iconfont (from google) sass files =======
    ======================================================================== */
-$material-design-icons-font-path:'../../node_modules/material-design-icons-iconfont/dist/fonts/' !default; 
-@import '../../node_modules/material-design-icons-iconfont/dist/material-design-icons.scss';
-
+@import '../../node_modules/material-design-icons/iconfont/material-icons.css';
 
 @import '../../node_modules/jstree/dist/themes/default/style.css';
 

@@ -61,7 +61,7 @@ describe(`AppComponent`, () => {
 
   it(`should be the Yadoms logo`, () => {
     expect(comp.yadomsLogo).toEqual('assets/img/logo.png');
-    expect(comp.name).toEqual('GSS Mobile');
+    expect(comp.name).toEqual('Yadoms web client');
   });
 
   it('should log ngOnInit', () => {
