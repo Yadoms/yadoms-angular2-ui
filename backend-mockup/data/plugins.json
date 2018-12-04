@@ -39,7 +39,7 @@
     },
     {
       "Id": 4,
-      "DisplayName": "Plugin 1",
+      "DisplayName": "Plugin 2",
       "Type": "PluginType1",
       "Configuration": null,
       "AutoStart": true,

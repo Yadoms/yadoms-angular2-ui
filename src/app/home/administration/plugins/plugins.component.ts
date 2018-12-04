@@ -40,9 +40,6 @@ export class PluginsComponent implements OnInit {
 
     // Apply sort to data
     this.availablePluginInstances.sort = this.sort;
-
-    // Default sort
-    // this.sort.sort(<MatSortable>{id: 'DisplayName'});
   }
 
   ngOnInit() {
