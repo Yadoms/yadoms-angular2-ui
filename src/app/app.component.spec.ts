@@ -12,6 +12,11 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SharedModule } from './shared';
 import { CommonModule } from '@angular/common';
 
+import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {AppDateAdapter} from './app.dates';
+import { RouterTestingModule } from '@angular/router/testing';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -29,11 +34,14 @@ describe(`AppComponent`, () => {
       imports: [
         HttpClientModule,
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),
-        CoreModule.forRoot()],
+        CoreModule.forRoot(),
+        RouterTestingModule],
       providers: [AppState,
         TranslateModule,
         SharedModule,
-        CommonModule]
+        CommonModule,
+        {provide: DateAdapter, useValue: AppDateAdapter, deps: [MAT_DATE_LOCALE]},
+        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}]
     })
     .compileComponents(); // compile template and css
   }));

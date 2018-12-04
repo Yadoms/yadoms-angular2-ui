@@ -20,6 +20,7 @@ import {Title} from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 /**
  * Export this function to allow TranslateModule initializing in AOT mode
@@ -40,7 +41,8 @@ describe(`Home`, () => {
       declarations: [HomeComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }})
+        TranslateModule.forRoot({loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }}),
+        RouterTestingModule
       ],
       providers: [
         BaseRequestOptions,
