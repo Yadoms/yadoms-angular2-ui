@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {administrationRoutes} from './administration.route';
 import {CommonModule} from '@angular/common';
-import {MatIconModule, MatDividerModule, MatListModule, MatTableModule, MatFormField, MatInputModule} from '@angular/material';
+import {MatIconModule, MatDividerModule, MatListModule, MatTableModule, MatInputModule, MatSortModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AdminPageHeaderComponent} from './admin-page-header/admin-page-header.component';
@@ -20,7 +20,7 @@ import {SharedModule} from '../../shared';
 
 @NgModule({
   imports: [CommonModule, administrationRoutes, MatListModule, MatIconModule, HttpClientModule, MatDividerModule, FormsModule, SharedModule,
-    MatTableModule, MatInputModule],
+    MatTableModule, MatInputModule, MatSortModule],
   declarations: [AdminPageHeaderComponent, SystemComponent, PluginsComponent, DevicesComponent,
     AutomationComponent, RecipientsComponent, UpdateComponent, MaintenanceComponent, AboutComponent]
 })

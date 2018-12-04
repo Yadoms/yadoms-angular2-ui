@@ -28,6 +28,22 @@
       },
       "AutoStart": true,
       "Category": "User"
+    },
+    {
+      "Id": 3,
+      "DisplayName": "Plugin 1",
+      "Type": "PluginType1",
+      "Configuration": null,
+      "AutoStart": true,
+      "Category": "User"
+    },
+    {
+      "Id": 4,
+      "DisplayName": "Plugin 1",
+      "Type": "PluginType1",
+      "Configuration": null,
+      "AutoStart": true,
+      "Category": "User"
     }
   ],
   "plugins": [

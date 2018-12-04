@@ -1,14 +1,19 @@
 <yd-admin-page-header title="Plugins"></yd-admin-page-header>
 
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="recherche...">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer...">
 </mat-form-field>
 
-<mat-table #table [dataSource]="availablePluginInstances">
+<mat-table class="mat-elevation-z8" #table [dataSource]="availablePluginInstances" matSort matSortActive="DisplayName" matSortDirection="asc" matSortDisableClear>
 
-  <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>{{column.value}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element[column.id]}}</mat-cell>
+  <ng-container matColumnDef="DisplayName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Plugin</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.DisplayName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Type">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Type de plugin</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Type}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

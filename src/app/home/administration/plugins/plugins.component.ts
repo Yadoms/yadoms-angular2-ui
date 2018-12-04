@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
 import {PluginInstance} from '../../../core/models/pluginInstances';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
 
 
 @Component({
@@ -13,29 +13,39 @@ import {MatTableDataSource} from '@angular/material';
 export class PluginsComponent implements OnInit {
 
   availablePluginInstances: MatTableDataSource<PluginInstance>;
-  displayedColumns = [];
-  columnNames = [{
-    id: 'DisplayName',
-    value: 'Plugin'
-  },
-    {
-      id: 'Type',
-      value: 'Type de plugin'
-    },
-    {
-      id: 'AutoStart',
-      value: 'Démarrage automatique'
-    }];
+  displayedColumns = ['DisplayName', 'Type'];
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private pluginService: PluginService) {
     pluginService.getAllPluginsInstance()
       .then(pluginInstances => {
         this.availablePluginInstances = new MatTableDataSource(pluginInstances.plugins);
+
+        this.configureSort();
       });
   }
 
+  private configureSort() {
+    // Make Sort insensitive to case
+    this.availablePluginInstances.sortingDataAccessor = ((item: PluginInstance, sortHeaderId: string) => {
+      switch (sortHeaderId) {
+        case 'DisplayName':
+          return item.DisplayName.toLocaleLowerCase();
+        case 'Type':
+          return item.Type.toLocaleLowerCase();
+        default:
+          return item[sortHeaderId];
+      }
+    });
+
+    // Apply sort to data
+    this.availablePluginInstances.sort = this.sort;
+
+    // Default sort
+    // this.sort.sort(<MatSortable>{id: 'DisplayName'});
+  }
+
   ngOnInit() {
-    this.displayedColumns = this.columnNames.map(x => x.id);
   }
 
   applyFilter(filterValue: string) {
