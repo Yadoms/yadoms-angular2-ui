@@ -23,6 +23,21 @@ tr.pi-row:not(.pi-expanded-row):active {
   display: flex;
 }
 
+.plugin-type-cell {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.plugin-type-label {
+  margin-left: 10px;
+}
+
+.plugin-icon {
+}
+
+/*TODO ménage*/
+
 .example-element-diagram {
   min-width: 80px;
   border: 2px solid black;

@@ -6,7 +6,7 @@ import {PluginService} from '../../../core/plugin.service';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared';
 import {PluginInstance, PluginInstances} from '../../../core/models/pluginInstances';
-import {PluginCategory} from '../../../core/models/available-plugin';
+import {AvailablePlugins, PluginCategory} from '../../../core/models/available-plugin';
 import {MatInputModule, MatTableModule} from '@angular/material';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -15,7 +15,8 @@ class YdAdminPageMockComponent {
 }
 
 class MockPluginService extends PluginService {
-  availablePluginInstances = new PluginInstances();
+  pluginInstances = new PluginInstances();
+  availablePlugins = new AvailablePlugins();
 
   constructor() {
     super(null);
@@ -65,11 +66,15 @@ class MockPluginService extends PluginService {
     pi4.AutoStart = true;
     pi4.Category = PluginCategory.User;
 
-    this.availablePluginInstances.plugins = [pi1, pi2, pi3, pi4];
+    this.pluginInstances.plugins = [pi1, pi2, pi3, pi4];
   }
 
   public getAllPluginsInstance(): Promise<PluginInstances> {
-    return Promise.resolve(this.availablePluginInstances);
+    return Promise.resolve(this.pluginInstances);
+  }
+
+  public getAvailablePluginsPackage(fields: string[]): Promise<AvailablePlugins> {
+    return Promise.resolve(this.availablePlugins);
   }
 }
 
@@ -107,56 +112,56 @@ describe('PluginsComponent', () => {
 
   it('should display plugins instances', fakeAsync(() => {
     fixture.detectChanges();
-    const lines = mainElement.querySelectorAll('mat-row');
+    const lines = mainElement.querySelectorAll('tr.mat-row.pi-row');
     expect(lines.length).toEqual(4);
-    let columns = lines[0].querySelectorAll('mat-cell');
+    let columns = lines[0].querySelectorAll('td.mat-cell');
     expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].Type);
+    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].Type);
 
-    columns = lines[1].querySelectorAll('mat-cell');
+    columns = lines[1].querySelectorAll('td.mat-cell');
     expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].Type);
+    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].Type);
 
-    columns = lines[2].querySelectorAll('mat-cell');
+    columns = lines[2].querySelectorAll('td.mat-cell');
     expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].Type);
+    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[2].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[2].Type);
 
-    columns = lines[3].querySelectorAll('mat-cell');
+    columns = lines[3].querySelectorAll('td.mat-cell');
     expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].Type);
+    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[3].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[3].Type);
   }));
 
   it('should display 2 instances with search "st"', fakeAsync(() => {
-    component.availablePluginInstances.filter = 'st';
+    component.pluginInstances.filter = 'st';
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('mat-row');
+      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
       expect(pluginInstancesElements.length).toEqual(2);
-      expect(pluginInstancesElements[0].querySelectorAll('mat-cell')[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].DisplayName);
-      expect(pluginInstancesElements[1].querySelectorAll('mat-cell')[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].DisplayName);
+      expect(pluginInstancesElements[0].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].DisplayName);
+      expect(pluginInstancesElements[1].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
     });
   }));
 
   it('should display 1 instance with search "sta"', fakeAsync(() => {
-    component.availablePluginInstances.filter = 'sta';
+    component.pluginInstances.filter = 'sta';
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('mat-row');
+      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
       expect(pluginInstancesElements.length).toEqual(1);
-      expect(pluginInstancesElements[0].querySelectorAll('mat-cell')[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].DisplayName);
+      expect(pluginInstancesElements[0].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
     });
   }));
 
   it('should display 0 instance with search "stax"', fakeAsync(() => {
     fixture.detectChanges();
-    component.availablePluginInstances.filter = 'stax';
+    component.pluginInstances.filter = 'stax';
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('mat-row');
+      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
       expect(pluginInstancesElements.length).toEqual(0);
     });
   }));
