@@ -109,25 +109,25 @@ describe('PluginsComponent', () => {
     fixture.detectChanges();
     const lines = mainElement.querySelectorAll('mat-row');
     expect(lines.length).toEqual(4);
-    let rows = lines[0].querySelectorAll('mat-cell');
-    expect(rows.length).toEqual(2);
-    expect(rows[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].DisplayName);
-    expect(rows[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].Type);
+    let columns = lines[0].querySelectorAll('mat-cell');
+    expect(columns.length).toEqual(2);
+    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[0].Type);
 
-    rows = lines[1].querySelectorAll('mat-cell');
-    expect(rows.length).toEqual(2);
-    expect(rows[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].DisplayName);
-    expect(rows[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].Type);
+    columns = lines[1].querySelectorAll('mat-cell');
+    expect(columns.length).toEqual(2);
+    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[1].Type);
 
-    rows = lines[2].querySelectorAll('mat-cell');
-    expect(rows.length).toEqual(2);
-    expect(rows[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].DisplayName);
-    expect(rows[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].Type);
+    columns = lines[2].querySelectorAll('mat-cell');
+    expect(columns.length).toEqual(2);
+    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[2].Type);
 
-    rows = lines[3].querySelectorAll('mat-cell');
-    expect(rows.length).toEqual(2);
-    expect(rows[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].DisplayName);
-    expect(rows[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].Type);
+    columns = lines[3].querySelectorAll('mat-cell');
+    expect(columns.length).toEqual(2);
+    expect(columns[0].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].DisplayName);
+    expect(columns[1].textContent).toEqual(mockPluginService.availablePluginInstances.plugins[3].Type);
   }));
 
   it('should display 2 instances with search "st"', fakeAsync(() => {

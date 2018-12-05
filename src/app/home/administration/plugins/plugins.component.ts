@@ -1,19 +1,28 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
 import {PluginInstance} from '../../../core/models/pluginInstances';
-import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
+import {MatTableDataSource, MatSort} from '@angular/material';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'yd-plugins',
   templateUrl: './plugins.component.html',
-  styleUrls: ['./plugins.component.css']
+  styleUrls: ['./plugins.component.css'],
+  animations: [
+  trigger('detailExpand', [
+    state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+    state('expanded', style({height: '*'})),
+    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+  ]),
+],
 })
 
 export class PluginsComponent implements OnInit {
 
   availablePluginInstances: MatTableDataSource<PluginInstance>;
   displayedColumns = ['DisplayName', 'Type'];
+  expandedPluginInstance: PluginInstance | null;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private pluginService: PluginService) {
@@ -26,7 +35,7 @@ export class PluginsComponent implements OnInit {
   }
 
   private configureSort() {
-    // Make Sort insensitive to case
+    // Make sort insensitive to case
     this.availablePluginInstances.sortingDataAccessor = ((item: PluginInstance, sortHeaderId: string) => {
       switch (sortHeaderId) {
         case 'DisplayName':
