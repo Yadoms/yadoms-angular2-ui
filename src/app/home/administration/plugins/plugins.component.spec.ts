@@ -1,7 +1,7 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import {PluginsComponent} from './plugins.component';
-import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Component} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared';
@@ -21,19 +21,19 @@ class MockPluginService extends PluginService {
   constructor() {
     super(null);
 
-    const pi1 = new PluginInstance();
-    pi1.Id = 1;
-    pi1.DisplayName = 'System';
-    pi1.Type = 'System';
-    pi1.Configuration = null;
-    pi1.AutoStart = true;
-    pi1.Category = PluginCategory.System;
+    const pi0 = new PluginInstance();
+    pi0.Id = 1;
+    pi0.DisplayName = 'System';
+    pi0.Type = 'System';
+    pi0.Configuration = null;
+    pi0.AutoStart = true;
+    pi0.Category = PluginCategory.System;
 
-    const pi2 = new PluginInstance();
-    pi2.Id = 2;
-    pi2.DisplayName = 'My fakePlugin instance';
-    pi2.Type = 'dev-fakePlugin';
-    pi2.Configuration = {
+    const pi1 = new PluginInstance();
+    pi1.Id = 2;
+    pi1.DisplayName = 'My fakePlugin instance';
+    pi1.Type = 'dev-fakePlugin';
+    pi1.Configuration = {
       'StringParameter': '',
       'BoolParameter': false,
       'IntParameter': 258,
@@ -47,26 +47,26 @@ class MockPluginService extends PluginService {
       },
       'ConditionalParameter': ''
     };
+    pi1.AutoStart = true;
+    pi1.Category = PluginCategory.User;
+
+    const pi2 = new PluginInstance();
+    pi2.Id = 3;
+    pi2.DisplayName = 'Plugin 1';
+    pi2.Type = 'PluginType1';
+    pi2.Configuration = null;
     pi2.AutoStart = true;
     pi2.Category = PluginCategory.User;
 
     const pi3 = new PluginInstance();
-    pi3.Id = 3;
-    pi3.DisplayName = 'Plugin 1';
+    pi3.Id = 4;
+    pi3.DisplayName = 'Plugin 2';
     pi3.Type = 'PluginType1';
     pi3.Configuration = null;
     pi3.AutoStart = true;
     pi3.Category = PluginCategory.User;
 
-    const pi4 = new PluginInstance();
-    pi4.Id = 4;
-    pi4.DisplayName = 'Plugin 2';
-    pi4.Type = 'PluginType1';
-    pi4.Configuration = null;
-    pi4.AutoStart = true;
-    pi4.Category = PluginCategory.User;
-
-    this.pluginInstances.plugins = [pi1, pi2, pi3, pi4];
+    this.pluginInstances.plugins = [pi0, pi1, pi2, pi3];
   }
 
   public getAllPluginsInstance(): Promise<PluginInstances> {
@@ -77,7 +77,6 @@ class MockPluginService extends PluginService {
     return Promise.resolve(this.availablePlugins);
   }
 }
-
 
 describe('PluginsComponent', () => {
   let component: PluginsComponent;
@@ -102,6 +101,18 @@ describe('PluginsComponent', () => {
     mockPluginService = new MockPluginService();
   });
 
+  function expectPluginInstancesDisplayed(displayedPluginInstances: PluginInstance[]) {
+    const lines = mainElement.querySelectorAll('tr.mat-row.pi-row');
+    expect(lines.length).toEqual(displayedPluginInstances.length);
+
+    for (let piIndex = 0; piIndex < displayedPluginInstances.length; ++piIndex) {
+      const columns = lines[piIndex].querySelectorAll('td.mat-cell');
+      expect(columns.length).toEqual(2);
+      expect(columns[0].textContent).toEqual(displayedPluginInstances[piIndex].DisplayName);
+      expect(columns[1].textContent).toEqual(displayedPluginInstances[piIndex].Type);
+    }
+  }
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -110,59 +121,78 @@ describe('PluginsComponent', () => {
     expect(mainElement.querySelectorAll('*')[0].tagName.toLowerCase()).toEqual('yd-admin-page-header');
   });
 
-  it('should display plugins instances', fakeAsync(() => {
+  it('should display plugin instances', fakeAsync(() => {
     fixture.detectChanges();
-    const lines = mainElement.querySelectorAll('tr.mat-row.pi-row');
-    expect(lines.length).toEqual(4);
-    let columns = lines[0].querySelectorAll('td.mat-cell');
-    expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].Type);
-
-    columns = lines[1].querySelectorAll('td.mat-cell');
-    expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].Type);
-
-    columns = lines[2].querySelectorAll('td.mat-cell');
-    expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[2].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[2].Type);
-
-    columns = lines[3].querySelectorAll('td.mat-cell');
-    expect(columns.length).toEqual(2);
-    expect(columns[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[3].DisplayName);
-    expect(columns[1].textContent).toEqual(mockPluginService.pluginInstances.plugins[3].Type);
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[0],
+      mockPluginService.pluginInstances.plugins[1],
+      mockPluginService.pluginInstances.plugins[2],
+      mockPluginService.pluginInstances.plugins[3]
+    ]);
   }));
 
-  it('should display 2 instances with search "st"', fakeAsync(() => {
+  it('should display 2 instances when filtering with "st"', fakeAsync(() => {
     component.pluginInstances.filter = 'st';
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
-      expect(pluginInstancesElements.length).toEqual(2);
-      expect(pluginInstancesElements[0].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[0].DisplayName);
-      expect(pluginInstancesElements[1].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
-    });
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[0],
+      mockPluginService.pluginInstances.plugins[1]
+    ]);
   }));
 
-  it('should display 1 instance with search "sta"', fakeAsync(() => {
+  it('should display 1 instance with when filtering with "sta"', fakeAsync(() => {
     component.pluginInstances.filter = 'sta';
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
-      expect(pluginInstancesElements.length).toEqual(1);
-      expect(pluginInstancesElements[0].querySelectorAll('td.mat-cell')[0].textContent).toEqual(mockPluginService.pluginInstances.plugins[1].DisplayName);
-    });
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[1]
+    ]);
   }));
 
-  it('should display 0 instance with search "stax"', fakeAsync(() => {
-    fixture.detectChanges();
+  it('should display 0 instance with when filtering with "stax"', fakeAsync(() => {
     component.pluginInstances.filter = 'stax';
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const pluginInstancesElements = mainElement.querySelectorAll('tr.mat-row.pi-row');
-      expect(pluginInstancesElements.length).toEqual(0);
-    });
+    expectPluginInstancesDisplayed([]);
   }));
+
+  // TODO no idea how to test sorting as sorting is not active in the test context, but works IRL...
+  // it('should be sorted according to plugin instance name', fakeAsync(() => {
+  //   fixture.detectChanges();
+  //
+  //   // Initially sorted ascending
+  //   expectPluginInstancesDisplayed([
+  //     mockPluginService.pluginInstances.plugins[1],
+  //     mockPluginService.pluginInstances.plugins[2],
+  //     mockPluginService.pluginInstances.plugins[3],
+  //     mockPluginService.pluginInstances.plugins[0]
+  //   ]);
+  //
+  //   // const piNameHeader = mainElement.querySelector('th[class$=DisplayName]');
+  //   const piNameHeader = mainElement.querySelector('th.mat-column-DisplayName');
+  //
+  //
+  //   // Click on sort by instance name
+  //   piNameHeader.click();
+  //   fixture.detectChanges();
+  //
+  //   // Initially sorted descending
+  //   expectPluginInstancesDisplayed([
+  //     mockPluginService.pluginInstances.plugins[0],
+  //     mockPluginService.pluginInstances.plugins[3],
+  //     mockPluginService.pluginInstances.plugins[2],
+  //     mockPluginService.pluginInstances.plugins[1]
+  //   ]);
+  //
+  //   // Click on sort by instance name
+  //   piNameHeader.click();
+  //   fixture.detectChanges();
+  //
+  //   // Initially sorted ascending
+  //   expectPluginInstancesDisplayed([
+  //     mockPluginService.pluginInstances.plugins[1],
+  //     mockPluginService.pluginInstances.plugins[2],
+  //     mockPluginService.pluginInstances.plugins[3],
+  //     mockPluginService.pluginInstances.plugins[0]
+  //   ]);
+  // }));
 });
+1
