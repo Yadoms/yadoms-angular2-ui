@@ -52,7 +52,7 @@ export class AboutComponent implements OnInit {
       .then(packages => {
         this.availableWidgets = packages;
       });
-    pluginService.getAvailablePluginsPackage(['type', 'author', 'url'])
+    pluginService.getAvailablePluginsInformation(['type', 'author', 'url'])
       .then(plugins => {
         this.availablePlugins.plugins = plugins.plugins.map((plugin) => {
           return {type: plugin['type'], author: plugin['author'], url: plugin['url']};

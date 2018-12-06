@@ -27,7 +27,7 @@ class MockPluginService extends PluginService {
     super(null);
   }
 
-  public getAvailablePluginsPackage(fields: string[]): Promise<AvailablePlugins> {
+  public getAvailablePluginsInformation(fields: string[]): Promise<AvailablePlugins> {
     return new Promise<AvailablePlugins>(() => {
     });
   }

@@ -73,7 +73,7 @@ class MockPluginService extends PluginService {
     return Promise.resolve(this.pluginInstances);
   }
 
-  public getAvailablePluginsPackage(fields: string[]): Promise<AvailablePlugins> {
+  public getAvailablePluginsInformation(fields: string[]): Promise<AvailablePlugins> {
     return Promise.resolve(this.availablePlugins);
   }
 }

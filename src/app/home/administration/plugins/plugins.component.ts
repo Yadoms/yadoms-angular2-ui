@@ -28,9 +28,10 @@ export class PluginsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private pluginService: PluginService) {
-    const p1 = pluginService.getAllPluginsInstance();
-    const p2 = pluginService.getAvailablePluginsPackage(null/*TODO*/);
-    Promise.all([p1, p2])
+    Promise.all([
+      pluginService.getAllPluginsInstance(),
+      pluginService.getAvailablePluginsInformation(null/*TODO*/) // TODO vraiment utile ?
+    ])
       .then(value => {
         this.pluginInstances = new MatTableDataSource(value[0].plugins);
         this.availablePlugins = value[1].plugins;
@@ -63,7 +64,7 @@ export class PluginsComponent implements OnInit {
     this.pluginInstances.filter = filterValue.trim().toLowerCase();
   }
 
-  getPlugin(pi: PluginInstance) {
-    return null; //TODO récupérer l'image du plugin
+  getPluginIcon(pi: PluginInstance) {
+    return "plugins/" + pi.Type + "/icon.png";
   }
 }
