@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared';
 import {PluginInstance, PluginInstances} from '../../../core/models/pluginInstances';
 import {AvailablePlugins, PluginCategory} from '../../../core/models/available-plugin';
-import {MatInputModule, MatTableModule} from '@angular/material';
+import {MatInputModule, MatTableModule, MatSortModule} from '@angular/material';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({selector: 'yd-admin-page-header', template: ''})
@@ -86,7 +86,7 @@ describe('PluginsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, SharedModule, MatTableModule, MatInputModule, BrowserAnimationsModule, NoopAnimationsModule],
+      imports: [FormsModule, SharedModule, MatTableModule, MatInputModule, MatSortModule, BrowserAnimationsModule, NoopAnimationsModule],
       declarations: [PluginsComponent, YdAdminPageMockComponent],
       providers: [{provide: PluginService, useClass: MockPluginService}]
     })
@@ -94,6 +94,7 @@ describe('PluginsComponent', () => {
       fixture = TestBed.createComponent(PluginsComponent);
       component = fixture.componentInstance;
       mainElement = fixture.debugElement.nativeElement;
+      component.ngOnInit();
     });
   }));
 
@@ -124,10 +125,10 @@ describe('PluginsComponent', () => {
   it('should display plugin instances', fakeAsync(() => {
     fixture.detectChanges();
     expectPluginInstancesDisplayed([
-      mockPluginService.pluginInstances.plugins[0],
       mockPluginService.pluginInstances.plugins[1],
       mockPluginService.pluginInstances.plugins[2],
-      mockPluginService.pluginInstances.plugins[3]
+      mockPluginService.pluginInstances.plugins[3],
+      mockPluginService.pluginInstances.plugins[0]
     ]);
   }));
 
@@ -135,8 +136,8 @@ describe('PluginsComponent', () => {
     component.pluginInstances.filter = 'st';
     fixture.detectChanges();
     expectPluginInstancesDisplayed([
-      mockPluginService.pluginInstances.plugins[0],
-      mockPluginService.pluginInstances.plugins[1]
+      mockPluginService.pluginInstances.plugins[1],
+      mockPluginService.pluginInstances.plugins[0]
     ]);
   }));
 
@@ -154,45 +155,43 @@ describe('PluginsComponent', () => {
     expectPluginInstancesDisplayed([]);
   }));
 
-  // TODO no idea how to test sorting as sorting is not active in the test context, but works IRL...
-  // it('should be sorted according to plugin instance name', fakeAsync(() => {
-  //   fixture.detectChanges();
-  //
-  //   // Initially sorted ascending
-  //   expectPluginInstancesDisplayed([
-  //     mockPluginService.pluginInstances.plugins[1],
-  //     mockPluginService.pluginInstances.plugins[2],
-  //     mockPluginService.pluginInstances.plugins[3],
-  //     mockPluginService.pluginInstances.plugins[0]
-  //   ]);
-  //
-  //   // const piNameHeader = mainElement.querySelector('th[class$=DisplayName]');
-  //   const piNameHeader = mainElement.querySelector('th.mat-column-DisplayName');
-  //
-  //
-  //   // Click on sort by instance name
-  //   piNameHeader.click();
-  //   fixture.detectChanges();
-  //
-  //   // Initially sorted descending
-  //   expectPluginInstancesDisplayed([
-  //     mockPluginService.pluginInstances.plugins[0],
-  //     mockPluginService.pluginInstances.plugins[3],
-  //     mockPluginService.pluginInstances.plugins[2],
-  //     mockPluginService.pluginInstances.plugins[1]
-  //   ]);
-  //
-  //   // Click on sort by instance name
-  //   piNameHeader.click();
-  //   fixture.detectChanges();
-  //
-  //   // Initially sorted ascending
-  //   expectPluginInstancesDisplayed([
-  //     mockPluginService.pluginInstances.plugins[1],
-  //     mockPluginService.pluginInstances.plugins[2],
-  //     mockPluginService.pluginInstances.plugins[3],
-  //     mockPluginService.pluginInstances.plugins[0]
-  //   ]);
-  // }));
+  it('should be sorted according to plugin instance name', fakeAsync(() => {
+    fixture.detectChanges();
+    // Initially sorted ascending
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[1],
+      mockPluginService.pluginInstances.plugins[2],
+      mockPluginService.pluginInstances.plugins[3],
+      mockPluginService.pluginInstances.plugins[0]
+    ]);
+
+    // const piNameHeader = mainElement.querySelector('th[class$=DisplayName]');
+    const piNameHeader = mainElement.querySelector('th.mat-column-DisplayName');
+
+
+    // Click on sort by instance name
+    piNameHeader.click();
+    fixture.detectChanges();
+
+    // Initially sorted descending
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[0],
+      mockPluginService.pluginInstances.plugins[3],
+      mockPluginService.pluginInstances.plugins[2],
+      mockPluginService.pluginInstances.plugins[1]
+    ]);
+
+    // Click on sort by instance name
+    piNameHeader.click();
+    fixture.detectChanges();
+
+    // Initially sorted ascending
+    expectPluginInstancesDisplayed([
+      mockPluginService.pluginInstances.plugins[1],
+      mockPluginService.pluginInstances.plugins[2],
+      mockPluginService.pluginInstances.plugins[3],
+      mockPluginService.pluginInstances.plugins[0]
+    ]);
+  }));
 });
-1
+

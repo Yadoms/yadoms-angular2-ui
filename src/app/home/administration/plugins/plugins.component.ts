@@ -27,10 +27,16 @@ export class PluginsComponent implements OnInit {
   expandedPluginInstance: PluginInstance | null;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private pluginService: PluginService) {
+  private pluginService: PluginService;
+
+  constructor(pluginService: PluginService) {
+    this.pluginService = pluginService;
+  }
+
+  ngOnInit() {
     Promise.all([
-      pluginService.getAllPluginsInstance(),
-      pluginService.getAvailablePluginsInformation(null/*TODO*/) // TODO vraiment utile ?
+      this.pluginService.getAllPluginsInstance(),
+      this.pluginService.getAvailablePluginsInformation(null/*TODO*/) // TODO vraiment utile ?
     ])
       .then(value => {
         this.pluginInstances = new MatTableDataSource(value[0].plugins);
@@ -57,14 +63,12 @@ export class PluginsComponent implements OnInit {
     this.pluginInstances.sort = this.sort;
   }
 
-  ngOnInit() {
-  }
-
   applyFilter(filterValue: string) {
     this.pluginInstances.filter = filterValue.trim().toLowerCase();
   }
 
   getPluginIcon(pi: PluginInstance) {
-    return "plugins/" + pi.Type + "/icon.png";
+    // return "plugins/" + pi.Type + "/icon.png";
+    return 'C:/Users/seb/Documents/Projets/Domotique/git/yadoms/builds/DEBUG/plugins/' + pi.Type + '/icon.png'; // TODO
   }
 }

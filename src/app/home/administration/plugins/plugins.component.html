@@ -4,7 +4,7 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer...">
 </mat-form-field>
 
-<table mat-table [dataSource]="pluginInstances" multiTemplateDataRows class="mat-elevation-z8" #table
+<table mat-table [dataSource]="pluginInstances" multiTemplateDataRows class="mat-elevation-z8"
        matSort matSortActive="DisplayName" matSortDirection="asc" matSortDisableClear>
 
   <ng-container matColumnDef="DisplayName">
