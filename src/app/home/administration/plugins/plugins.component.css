@@ -21,6 +21,7 @@ tr.pi-row:not(.pi-expanded-row):active {
 .pi-detail {
   overflow: hidden;
   display: flex;
+  padding-bottom: 16px;
 }
 
 .plugin-type-cell {
@@ -37,28 +38,25 @@ tr.pi-row:not(.pi-expanded-row):active {
   max-height: 50px;
 }
 
-/*TODO ménage*/
-
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
+.pi-detail-icon {
+  border: 2px solid lightgray;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   height: 104px;
 }
 
-.example-element-symbol {
+.pi-detail-description {
+  padding: 16px;
+}
+
+.pi-detail-name {
   font-weight: bold;
   font-size: 40px;
   line-height: normal;
 }
 
-.example-element-description {
-  padding: 16px;
-}
-
-.example-element-description-attribution {
+.pi-detail-type {
   opacity: 0.5;
 }
 
