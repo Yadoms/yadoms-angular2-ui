@@ -68,7 +68,6 @@ export class PluginsComponent implements OnInit {
   }
 
   getPluginIcon(pi: PluginInstance) {
-    // return "plugins/" + pi.Type + "/icon.png";
-    return 'C:/Users/seb/Documents/Projets/Domotique/git/yadoms/builds/DEBUG/plugins/' + pi.Type + '/icon.png'; // TODO
+    return 'plugins/' + pi.Type + '/icon.png';
   }
 }

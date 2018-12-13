@@ -105,6 +105,13 @@ router.put('/plugin', function (req, res) {
 });
 
 
+router.get('/plugins/:plugintype/icon.png', function (req, res) {
+  fs.readFile(__dirname + '/data/plugins/' + req.params.plugintype + 'icon.jpg', function (err, data) {
+    res.json(generateSuccess(data));
+  });
+});
+
+
 router.get('/plugin/instance', function (req, res) {
   fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
@@ -113,6 +120,9 @@ router.get('/plugin/instance', function (req, res) {
 });
 
 
+yd.use('/plugins/:plugintype/icon.png', function (req, res) {
+  res.sendFile(__dirname + '/data/plugins/' + req.params.plugintype + '/icon.png');
+});
 yd.use('/rest', router);
 
 const server = yd.listen(8080, function () {

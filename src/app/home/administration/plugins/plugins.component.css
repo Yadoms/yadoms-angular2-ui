@@ -34,6 +34,7 @@ tr.pi-row:not(.pi-expanded-row):active {
 }
 
 .plugin-icon {
+  max-height: 50px;
 }
 
 /*TODO ménage*/

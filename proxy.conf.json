@@ -1,4 +1,8 @@
 {
+  "/plugins/*": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
   "/rest/*": {
     "target": "http://localhost:8080",
     "secure": false
