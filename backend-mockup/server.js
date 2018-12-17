@@ -1,3 +1,4 @@
+
 const express = require('express');
 const yd = express();
 const fs = require('fs');
@@ -14,7 +15,7 @@ function generateSuccess(data) {
   return {
     result: true,
     data: data,
-    message: ""
+    message: ''
   };
 }
 
@@ -54,7 +55,7 @@ router.get('/page/:pageid', function (req, res) {
     if (result) {
       res.json(generateSuccess(result));
     } else {
-      res.json(generateError('Unknown page id=' + req.params.pageid))
+      res.json(generateError('Unknown page id=' + req.params.pageid));
     }
   });
 });
@@ -112,18 +113,33 @@ router.get('/plugin/instance', function (req, res) {
   });
 });
 
+const PluginInstanceState = Object.freeze({
+  "Unknown": 0,
+  "Error": 1,
+  "Stopped": 2,
+  "Running": 3,
+  "Custom": 4,
+  "WaitDebugger": 5
+});
 
 router.get('/plugin/instanceWithState', function (req, res) {
   fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function (err, data) {
     const d = JSON.parse(data);
     let instancesWithState = [];
-    state = 1;
     for (let instance of d.instances) {
-      let instanceWithState = {};
-      instanceWithState.instance = instance;
-      instanceWithState.state = state++;
+      let instanceWithState = {
+        'instance': instance
+      };
       instancesWithState.push(instanceWithState);
     }
+    instancesWithState[0]['state'] = {'state': PluginInstanceState.Running};
+    instancesWithState[1]['state'] = {'state': PluginInstanceState.Stopped};
+    instancesWithState[2]['state'] = {
+      'state': PluginInstanceState.Custom,
+      'messageId': 'connecting',
+      'messageData': 'TODO à gérer'
+    }
+    instancesWithState[3]['state'] = {'state': PluginInstanceState.Error};
     res.json(generateSuccess(instancesWithState));
   });
 });
@@ -135,8 +151,8 @@ yd.use('/plugins/:plugintype/icon.png', function (req, res) {
 yd.use('/rest', router);
 
 const server = yd.listen(8080, function () {
-  const host = server.address().address === "::" ? "localhost" : server.address().address;
+  const host = server.address().address === '::' ? 'localhost' : server.address().address;
   const port = server.address().port;
 
-  console.log("Yadoms Mockup Server started : http://%s:%s", host, port);
+  console.log('Yadoms Mockup Server started : http://%s:%s', host, port);
 });

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
-import {PluginInstance, PluginInstanceWithState, PluginState} from '../../../core/models/pluginInstances';
+import {PluginInstance, PluginInstanceWithState, PluginInstanceFullState, PluginInstanceState} from '../../../core/models/pluginInstances';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AvailablePlugin} from '../../../core/models/available-plugin';
@@ -67,14 +67,33 @@ export class PluginsComponent implements OnInit {
     this.pluginInstances.filter = filterValue.trim().toLowerCase();
   }
 
-  getStateIcon(piState: PluginState) {
+  getStateIcon(piState: PluginInstanceState) {
     switch (piState) {
-      case PluginState.Error: return 'error_outline';
-      case PluginState.Stopped: return 'stop';
-      case PluginState.Running: return 'play_arrow';
-      case PluginState.Custom: return 'info';
-      case PluginState.WaitDebugger: return 'bug_report';
+      case PluginInstanceState.Error: return 'error_outline';
+      case PluginInstanceState.Stopped: return 'stop';
+      case PluginInstanceState.Running: return 'play_arrow';
+      case PluginInstanceState.Custom: return 'info';
+      case PluginInstanceState.WaitDebugger: return 'bug_report';
       default: return 'help_outline';
+    }
+  }
+
+  getStateLabel(piState: PluginInstanceFullState) {
+    try {
+      switch (piState.state) {
+        //TODO gérer i18n
+        case PluginInstanceState.Error: return 'Erreur';
+        case PluginInstanceState.Stopped: return 'Arrêté';
+        case PluginInstanceState.Running: return 'Démarré';
+        case PluginInstanceState.Custom: return piState.messageId;
+        case PluginInstanceState.WaitDebugger: return 'En attente du debugger...';
+        default: return 'Inconnu';
+      }
+    }
+    catch (e) {
+      console.error('Fail to display state label. piState = ' + piState);
+      console.error(e);
+      return 'Inconnu';
     }
   }
 }

@@ -1,6 +1,6 @@
 import {PluginCategory} from './available-plugin';
 
-export enum PluginState {
+export enum PluginInstanceState {
   Unknown = 0,
   Error = 1,
   Stopped = 2,
@@ -9,8 +9,8 @@ export enum PluginState {
   WaitDebugger = 5
 }
 
-class PluginsInstanceFullState {
-  public state: PluginState;
+export class PluginInstanceFullState {
+  public state: PluginInstanceState;
   public messageId: string;
   public messageData: string;
 }
@@ -30,7 +30,7 @@ export class PluginInstances {
 
 export class PluginInstanceWithState {
   public instance: PluginInstance;
-  public state: PluginsInstanceFullState;
+  public state: PluginInstanceFullState;
 }
 
 export class PluginInstancesWithState {

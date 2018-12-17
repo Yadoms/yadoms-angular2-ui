@@ -60,3 +60,8 @@ tr.pi-row:not(.pi-expanded-row):active {
   opacity: 0.5;
 }
 
+.pi-detail-state {
+  line-height: normal;
+}
+
+

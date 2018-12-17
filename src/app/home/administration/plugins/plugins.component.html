@@ -9,7 +9,7 @@
 
   <ng-container matColumnDef="State">
     <th mat-header-cell *matHeaderCellDef>State</th>
-    <td mat-cell *matCellDef="let pi"><mat-icon>{{getStateIcon(pi.state)}}</mat-icon></td>
+    <td mat-cell *matCellDef="let pi"><mat-icon>{{getStateIcon(pi.state.state)}}</mat-icon></td>
   </ng-container>
 
   <ng-container matColumnDef="DisplayName">
@@ -39,7 +39,8 @@
         <div class="pi-detail-description">
           <div class="pi-detail-name">{{pi.instance.DisplayName}}</div>
           <div class="pi-detail-type">{{pi.instance.Type}}</div>
-          <div class="pi-detail-name">{{pi.state}}</div>
+          <br>
+          <div class="pi-detail-state">Etat : {{getStateLabel(pi.state)}}</div>
         </div>
       </div>
     </td>
