@@ -7,9 +7,14 @@
 <table mat-table [dataSource]="pluginInstances" multiTemplateDataRows class="mat-elevation-z8"
        matSort matSortActive="DisplayName" matSortDirection="asc" matSortDisableClear>
 
+  <ng-container matColumnDef="State">
+    <th mat-header-cell *matHeaderCellDef>State</th>
+    <td mat-cell *matCellDef="let pi"><mat-icon>{{getStateIcon(pi.state)}}</mat-icon></td>
+  </ng-container>
+
   <ng-container matColumnDef="DisplayName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Plugin</th>
-    <td mat-cell *matCellDef="let pi">{{pi.DisplayName}}</td>
+    <td mat-cell *matCellDef="let pi">{{pi.instance.DisplayName}}</td>
   </ng-container>
 
   <ng-container matColumnDef="Type">
@@ -17,9 +22,9 @@
     <td mat-cell *matCellDef="let pi">
       <div class="plugin-type-cell">
         <div>
-          <img class="plugin-icon" src="{{getPluginIcon(pi)}}">
+          <img class="plugin-icon" src="plugins/{{pi.instance.Type}}/icon.png">
         </div>
-        <div class="plugin-type-label">{{pi.Type}}</div>
+        <div class="plugin-type-label">{{pi.instance.Type}}</div>
       </div>
     </td>
   </ng-container>
@@ -29,11 +34,12 @@
     <td mat-cell *matCellDef="let pi" [attr.colspan]="displayedColumns.length">
       <div class="pi-detail" [@detailExpand]="pi == expandedPluginInstance ? 'expanded' : 'collapsed'">
         <div>
-          <img class="pi-detail-icon" src="{{getPluginIcon(pi)}}">
+          <img class="pi-detail-icon" src="plugins/{{pi.instance.Type}}/icon.png">
         </div>
         <div class="pi-detail-description">
-          <div class="pi-detail-name">{{pi.DisplayName}}</div>
-          <div class="pi-detail-type">{{pi.Type}}</div>
+          <div class="pi-detail-name">{{pi.instance.DisplayName}}</div>
+          <div class="pi-detail-type">{{pi.instance.Type}}</div>
+          <div class="pi-detail-name">{{pi.state}}</div>
         </div>
       </div>
     </td>

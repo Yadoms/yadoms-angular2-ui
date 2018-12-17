@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
-import {PluginInstance} from '../../../core/models/pluginInstances';
-import {MatTableDataSource, MatSort} from '@angular/material';
+import {PluginInstance, PluginInstanceWithState, PluginState} from '../../../core/models/pluginInstances';
+import {MatSort, MatTableDataSource} from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AvailablePlugin} from '../../../core/models/available-plugin';
 
@@ -21,9 +21,9 @@ import {AvailablePlugin} from '../../../core/models/available-plugin';
 
 export class PluginsComponent implements OnInit {
 
-  pluginInstances: MatTableDataSource<PluginInstance>;
+  pluginInstances: MatTableDataSource<PluginInstanceWithState>;
   availablePlugins: AvailablePlugin[];
-  displayedColumns = ['DisplayName', 'Type'];
+  displayedColumns = ['State', 'DisplayName', 'Type'];
   expandedPluginInstance: PluginInstance | null;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -35,11 +35,11 @@ export class PluginsComponent implements OnInit {
 
   ngOnInit() {
     Promise.all([
-      this.pluginService.getAllPluginsInstance(),
+      this.pluginService.getAllPluginsInstanceWithState(),
       this.pluginService.getAvailablePluginsInformation(null/*TODO*/) // TODO vraiment utile ?
     ])
       .then(value => {
-        this.pluginInstances = new MatTableDataSource(value[0].plugins);
+        this.pluginInstances = new MatTableDataSource(value[0].instances);
         this.availablePlugins = value[1].plugins;
 
         this.configureSort();
@@ -48,14 +48,14 @@ export class PluginsComponent implements OnInit {
 
   private configureSort() {
     // Make sort insensitive to case
-    this.pluginInstances.sortingDataAccessor = ((item: PluginInstance, sortHeaderId: string) => {
+    this.pluginInstances.sortingDataAccessor = ((item: PluginInstanceWithState, sortHeaderId: string) => {
       switch (sortHeaderId) {
         case 'DisplayName':
-          return item.DisplayName.toLocaleLowerCase();
+          return item.instance.DisplayName.toLocaleLowerCase();
         case 'Type':
-          return item.Type.toLocaleLowerCase();
+          return item.instance.Type.toLocaleLowerCase();
         default:
-          return item[sortHeaderId];
+          return item.instance[sortHeaderId];
       }
     });
 
@@ -67,7 +67,14 @@ export class PluginsComponent implements OnInit {
     this.pluginInstances.filter = filterValue.trim().toLowerCase();
   }
 
-  getPluginIcon(pi: PluginInstance) {
-    return 'plugins/' + pi.Type + '/icon.png';
+  getStateIcon(piState: PluginState) {
+    switch (piState) {
+      case PluginState.Error: return 'error_outline';
+      case PluginState.Stopped: return 'stop';
+      case PluginState.Running: return 'play_arrow';
+      case PluginState.Custom: return 'info';
+      case PluginState.WaitDebugger: return 'bug_report';
+      default: return 'help_outline';
+    }
   }
 }

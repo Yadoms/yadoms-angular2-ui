@@ -113,6 +113,22 @@ router.get('/plugin/instance', function (req, res) {
 });
 
 
+router.get('/plugin/instanceWithState', function (req, res) {
+  fs.readFile(__dirname + '/data/plugins.json', 'utf-8', function (err, data) {
+    const d = JSON.parse(data);
+    let instancesWithState = [];
+    state = 1;
+    for (let instance of d.instances) {
+      let instanceWithState = {};
+      instanceWithState.instance = instance;
+      instanceWithState.state = state++;
+      instancesWithState.push(instanceWithState);
+    }
+    res.json(generateSuccess(instancesWithState));
+  });
+});
+
+
 yd.use('/plugins/:plugintype/icon.png', function (req, res) {
   res.sendFile(__dirname + '/data/plugins/' + req.params.plugintype + '/icon.png');
 });
