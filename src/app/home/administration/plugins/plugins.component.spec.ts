@@ -1,13 +1,19 @@
 import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import {PluginsComponent} from './plugins.component';
-import {Component} from '@angular/core';
 import {PluginService} from '../../../core/plugin.service';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared';
-import {PluginInstance, PluginInstances} from '../../../core/models/pluginInstances';
+import {
+  PluginInstance, PluginInstanceFullState,
+  PluginInstances,
+  PluginInstanceState,
+  PluginInstancesWithState,
+  PluginInstanceWithState
+} from '../../../core/models/pluginInstances';
 import {AvailablePlugins, PluginCategory} from '../../../core/models/available-plugin';
-import {MatInputModule, MatTableModule, MatSortModule} from '@angular/material';
+import {MatInputModule, MatSortModule, MatTableModule} from '@angular/material';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({selector: 'yd-admin-page-header', template: ''})
@@ -16,6 +22,7 @@ class YdAdminPageMockComponent {
 
 class MockPluginService extends PluginService {
   pluginInstances = new PluginInstances();
+  pluginInstancesWithState = new PluginInstancesWithState();
   availablePlugins = new AvailablePlugins();
 
   constructor() {
@@ -67,6 +74,22 @@ class MockPluginService extends PluginService {
     pi3.Category = PluginCategory.User;
 
     this.pluginInstances.plugins = [pi0, pi1, pi2, pi3];
+
+    this.pluginInstancesWithState.instances = [];
+    const pifs0 = new PluginInstanceFullState();
+    pifs0.state = PluginInstanceState.Running;
+    this.pluginInstancesWithState.instances.push({instance: pi0, state: pifs0});
+    const pifs1 = new PluginInstanceFullState();
+    pifs1.state = PluginInstanceState.Stopped;
+    this.pluginInstancesWithState.instances.push({instance: pi1, state: pifs1});
+    const pifs2 = new PluginInstanceFullState();
+    pifs2.state = PluginInstanceState.Custom;
+    pifs2.messageId = 'connecting';
+    pifs2.messageData = 'TODO à gérer';
+    this.pluginInstancesWithState.instances.push({instance: pi2, state: pifs2});
+    const pifs3 = new PluginInstanceFullState();
+    pifs3.state = PluginInstanceState.Error;
+    this.pluginInstancesWithState.instances.push({instance: pi3, state: pifs3});
   }
 
   public getAllPluginsInstance(): Promise<PluginInstances> {
@@ -75,6 +98,10 @@ class MockPluginService extends PluginService {
 
   public getAvailablePluginsInformation(fields: string[]): Promise<AvailablePlugins> {
     return Promise.resolve(this.availablePlugins);
+  }
+
+  public getAllPluginsInstanceWithState(): Promise<PluginInstancesWithState> {
+    return Promise.resolve(this.pluginInstancesWithState);
   }
 }
 
@@ -88,6 +115,7 @@ describe('PluginsComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, SharedModule, MatTableModule, MatInputModule, MatSortModule, BrowserAnimationsModule, NoopAnimationsModule],
       declarations: [PluginsComponent, YdAdminPageMockComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [{provide: PluginService, useClass: MockPluginService}]
     })
       .compileComponents().then(() => {
@@ -108,9 +136,9 @@ describe('PluginsComponent', () => {
 
     for (let piIndex = 0; piIndex < displayedPluginInstances.length; ++piIndex) {
       const columns = lines[piIndex].querySelectorAll('td.mat-cell');
-      expect(columns.length).toEqual(2);
-      expect(columns[0].textContent).toEqual(displayedPluginInstances[piIndex].DisplayName);
-      expect(columns[1].textContent).toEqual(displayedPluginInstances[piIndex].Type);
+      expect(columns.length).toEqual(3);
+      expect(columns[1].textContent).toEqual(displayedPluginInstances[piIndex].DisplayName);
+      expect(columns[2].textContent).toEqual(displayedPluginInstances[piIndex].Type);
     }
   }
 

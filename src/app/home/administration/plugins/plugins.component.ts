@@ -61,20 +61,32 @@ export class PluginsComponent implements OnInit {
 
     // Apply sort to data
     this.pluginInstances.sort = this.sort;
+
+    this.pluginInstances.filterPredicate = (data: PluginInstanceWithState, filterValue: string) => {
+      filterValue = filterValue.trim().toLocaleLowerCase();
+      return  data.instance.DisplayName.indexOf(filterValue) !== -1 ||
+        data.instance.Type.indexOf(filterValue) !== -1;
+    };
   }
 
   applyFilter(filterValue: string) {
-    this.pluginInstances.filter = filterValue.trim().toLowerCase();
+    this.pluginInstances.filter = filterValue;
   }
 
   getStateIcon(piState: PluginInstanceState) {
     switch (piState) {
-      case PluginInstanceState.Error: return 'error_outline';
-      case PluginInstanceState.Stopped: return 'stop';
-      case PluginInstanceState.Running: return 'play_arrow';
-      case PluginInstanceState.Custom: return 'info';
-      case PluginInstanceState.WaitDebugger: return 'bug_report';
-      default: return 'help_outline';
+      case PluginInstanceState.Error:
+        return 'error_outline';
+      case PluginInstanceState.Stopped:
+        return 'stop';
+      case PluginInstanceState.Running:
+        return 'play_arrow';
+      case PluginInstanceState.Custom:
+        return 'info';
+      case PluginInstanceState.WaitDebugger:
+        return 'bug_report';
+      default:
+        return 'help_outline';
     }
   }
 
@@ -82,15 +94,20 @@ export class PluginsComponent implements OnInit {
     try {
       switch (piState.state) {
         //TODO gérer i18n
-        case PluginInstanceState.Error: return 'Erreur';
-        case PluginInstanceState.Stopped: return 'Arrêté';
-        case PluginInstanceState.Running: return 'Démarré';
-        case PluginInstanceState.Custom: return piState.messageId;
-        case PluginInstanceState.WaitDebugger: return 'En attente du debugger...';
-        default: return 'Inconnu';
+        case PluginInstanceState.Error:
+          return 'Erreur';
+        case PluginInstanceState.Stopped:
+          return 'Arrêté';
+        case PluginInstanceState.Running:
+          return 'Démarré';
+        case PluginInstanceState.Custom:
+          return piState.messageId;
+        case PluginInstanceState.WaitDebugger:
+          return 'En attente du debugger...';
+        default:
+          return 'Inconnu';
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.error('Fail to display state label. piState = ' + piState);
       console.error(e);
       return 'Inconnu';

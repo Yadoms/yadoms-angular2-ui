@@ -1,4 +1,3 @@
-
 const express = require('express');
 const yd = express();
 const fs = require('fs');
@@ -132,14 +131,14 @@ router.get('/plugin/instanceWithState', function (req, res) {
       };
       instancesWithState.push(instanceWithState);
     }
-    instancesWithState[0]['state'] = {'state': PluginInstanceState.Running};
-    instancesWithState[1]['state'] = {'state': PluginInstanceState.Stopped};
+    instancesWithState[0]['state'] = {state: PluginInstanceState.Running};
+    instancesWithState[1]['state'] = {state: PluginInstanceState.Stopped};
     instancesWithState[2]['state'] = {
-      'state': PluginInstanceState.Custom,
-      'messageId': 'connecting',
-      'messageData': 'TODO à gérer'
+      state: PluginInstanceState.Custom,
+      messageId: 'connecting',
+      messageData: 'TODO à gérer'
     }
-    instancesWithState[3]['state'] = {'state': PluginInstanceState.Error};
+    instancesWithState[3]['state'] = {state: PluginInstanceState.Error};
     res.json(generateSuccess(instancesWithState));
   });
 });
