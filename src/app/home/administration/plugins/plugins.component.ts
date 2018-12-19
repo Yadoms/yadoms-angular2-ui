@@ -63,7 +63,7 @@ export class PluginsComponent implements OnInit {
 
     this.pluginInstances.filterPredicate = (data: PluginInstanceWithState, filterValue: string) => {
       filterValue = filterValue.trim().toLocaleLowerCase();
-      return  data.instance.DisplayName.indexOf(filterValue) !== -1 ||
+      return data.instance.DisplayName.indexOf(filterValue) !== -1 ||
         data.instance.Type.indexOf(filterValue) !== -1;
     };
   }
@@ -111,5 +111,19 @@ export class PluginsComponent implements OnInit {
       console.error(e);
       return 'Inconnu';
     }
+  }
+
+  isRunning(piState: PluginInstanceFullState) {
+    switch (piState.state) {
+      case PluginInstanceState.Running:
+      case PluginInstanceState.Custom:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  startStop(piState: PluginInstanceFullState) {
+    //TODO
   }
 }

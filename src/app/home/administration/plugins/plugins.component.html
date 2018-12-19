@@ -35,6 +35,10 @@
       <div class="pi-detail" [@detailExpand]="pi == expandedPluginInstance ? 'expanded' : 'collapsed'">
         <div>
           <img class="pi-detail-icon" src="plugins/{{pi.instance.Type}}/icon.png">
+          <button mat-icon-button (click)="startStop(pi.state)">
+            <mat-icon *ngIf="isRunning(pi.state)">pause_circle_ouline</mat-icon>
+            <mat-icon *ngIf="!isRunning(pi.state)">play_arrow</mat-icon>
+          </button>
         </div>
         <div class="pi-detail-description">
           <div class="pi-detail-name">{{pi.instance.DisplayName}}</div>
