@@ -5,7 +5,6 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AvailablePlugin} from '../../../core/models/available-plugin';
 
-
 @Component({
   selector: 'yd-plugins',
   templateUrl: './plugins.component.html',
@@ -76,15 +75,15 @@ export class PluginsComponent implements OnInit {
   getStateIcon(piState: PluginInstanceState) {
     switch (piState) {
       case PluginInstanceState.Error:
-        return 'error_outline';
+        return 'warning';
       case PluginInstanceState.Stopped:
-        return 'stop';
+        return 'highlight_off';
       case PluginInstanceState.Running:
-        return 'play_arrow';
+        return 'check_circle';
       case PluginInstanceState.Custom:
-        return 'info';
+        return 'info_outline';
       case PluginInstanceState.WaitDebugger:
-        return 'bug_report';
+        return 'swap_horiz';
       default:
         return 'help_outline';
     }
