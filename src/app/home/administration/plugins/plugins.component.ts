@@ -27,6 +27,7 @@ export class PluginsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   private pluginService: PluginService;
+  startStopButtonEnabled: {};
 
   constructor(pluginService: PluginService) {
     this.pluginService = pluginService;
@@ -41,6 +42,10 @@ export class PluginsComponent implements OnInit {
         this.pluginInstances = new MatTableDataSource(value[0].instances);
         this.availablePlugins = value[1].plugins;
 
+        this.startStopButtonEnabled = {};
+        for (const pi of this.pluginInstances.data) {
+          this.startStopButtonEnabled[pi.instance.Id] = true;
+        }
         this.configureSort();
       });
   }
@@ -115,15 +120,32 @@ export class PluginsComponent implements OnInit {
 
   isRunning(piState: PluginInstanceFullState) {
     switch (piState.state) {
-      case PluginInstanceState.Running:
-      case PluginInstanceState.Custom:
-        return true;
-      default:
+      case PluginInstanceState.Error:
+      case PluginInstanceState.Stopped:
         return false;
+      default:
+        return true;
     }
   }
 
-  startStop(piState: PluginInstanceFullState) {
-    //TODO
+  startStop(pi: PluginInstanceWithState) {
+    this.startStopButtonEnabled[pi.instance.Id] = false;
+    this.pluginService.startStop(pi.instance, !this.isRunning(pi.state))
+      .then(() => {
+        pi.state.state = this.isRunning(pi.state) ? PluginInstanceState.Stopped : PluginInstanceState.Running;//TODO c'est pas bon, pour test. En principe, il faut attendre la prochaine mise à jour 
+        this.startStopButtonEnabled[pi.instance.Id] = true;
+      })
+      .catch(() => {
+        console.error('Fail to start plugin instance');
+        this.startStopButtonEnabled[pi.instance.Id] = true;
+      });
+  }
+
+  isStartStopButtonEnabled(pi: PluginInstanceWithState) {
+    try {
+      return this.startStopButtonEnabled[pi.instance.Id];
+    } catch (e) {
+      return false;
+    }
   }
 }

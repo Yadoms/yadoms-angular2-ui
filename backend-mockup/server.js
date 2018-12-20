@@ -112,6 +112,16 @@ router.get('/plugin/instance', function (req, res) {
   });
 });
 
+
+router.put('/plugin/:pluginInstanceId/start', function (req, res) {
+  console.log("Plugin " + req.params.pluginInstanceId + " started");
+  res.json(generateSuccess());
+});
+router.put('/plugin/:pluginInstanceId/stop', function (req, res) {
+  console.log("Plugin " + req.params.pluginInstanceId + " stopped");
+  res.json(generateSuccess());
+});
+
 const PluginInstanceState = Object.freeze({
   "Unknown": 0,
   "Error": 1,

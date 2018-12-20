@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {RestServerService} from './restserver.service';
-import {AvailablePlugins} from './models/available-plugin';
+import {AvailablePlugins, PluginCategory} from './models/available-plugin';
 import {PluginInstance, PluginInstances, PluginInstancesWithState, PluginInstanceWithState} from './models/pluginInstances';
+import {Resolve} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,12 @@ export class PluginService {
           resolve(pi);
         });
     });
+  }
+
+  public startStop(pi: PluginInstance, start: boolean): Promise<void> {
+    if (pi.Category === PluginCategory.System) {
+      return Promise.resolve();
+    }
+    return this.restServerService.put('plugin/' + pi.Id + (start ? '/start' : '/stop'));
   }
 }
